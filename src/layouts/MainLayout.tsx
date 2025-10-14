@@ -50,7 +50,7 @@ export default function MainLayout() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen">
       {/* Header */}
       <header className={classNames(
         "fixed top-0 z-40 flex h-14 w-full items-center justify-between border-b border-gray-200 bg-white px-4",

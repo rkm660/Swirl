@@ -57,6 +57,8 @@ button {
 
 html, body, #root {
   overflow-x: hidden !important;
+  background-color: #f3f4f6 !important;
+  min-height: 100vh !important;
 }
 
 /* 75% Zoom Effect - Using CSS zoom property (most reliable) */
