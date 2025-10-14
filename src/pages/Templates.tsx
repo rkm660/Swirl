@@ -5,19 +5,20 @@ interface Template {
   id: string
   name: string
   content: string
+  description: string
 }
 
 export default function Templates() {
   const [templates, setTemplates] = useState<Template[]>([
-    { id: 'A', name: 'Template A', content: '' },
-    { id: 'B', name: 'Template B', content: '' },
-    { id: 'C', name: 'Template C', content: '' },
-    { id: 'D', name: 'Template D', content: '' },
-    { id: 'E', name: 'Template E', content: '' },
+    { id: 'A', name: 'Template A', content: '', description: '' },
+    { id: 'B', name: 'Template B', content: '', description: '' },
+    { id: 'C', name: 'Template C', content: '', description: '' },
+    { id: 'D', name: 'Template D', content: '', description: '' },
+    { id: 'E', name: 'Template E', content: '', description: '' },
   ])
 
-  const updateTemplate = (id: string, content: string) => {
-    setTemplates(prev => prev.map(t => t.id === id ? { ...t, content } : t))
+  const updateTemplate = (id: string, field: 'content' | 'description', value: string) => {
+    setTemplates(prev => prev.map(t => t.id === id ? { ...t, [field]: value } : t))
   }
 
   const getCharacterCount = (content: string) => content.length
@@ -63,10 +64,28 @@ export default function Templates() {
                 </div>
               </div>
 
+              {/* Description field */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  value={template.description}
+                  onChange={(e) => updateTemplate(template.id, 'description', e.target.value)}
+                  placeholder="Brief description of when to use this template..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                />
+              </div>
+
+              {/* Content field */}
               <div className="relative">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Template Content
+                </label>
                 <textarea
                   value={template.content}
-                  onChange={(e) => updateTemplate(template.id, e.target.value)}
+                  onChange={(e) => updateTemplate(template.id, 'content', e.target.value)}
                   placeholder="Hi {first_name}, I'd love to connect with you..."
                   className={`w-full px-3 py-2 border rounded-md resize-none ${
                     isOverLimit(template.content) 
