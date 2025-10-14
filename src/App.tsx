@@ -22,60 +22,23 @@ function App() {
     return <LoadingSpinner />
   }
 
+  const ProtectedPage = ({ children }: { children: React.ReactNode }) => (
+    <ProtectedRoute>
+      <MainLayout>{children}</MainLayout>
+    </ProtectedRoute>
+  )
+
   return (
     <>
       <AuthCallback />
       <Routes>
         <Route path="/" element={<Home />} />
-        
-        <Route path="/dashboard" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Dashboard />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/goal" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Goal />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/templates" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Templates />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/prospects" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Prospects />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/outbounds" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Outbounds />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/settings" element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Settings />
-            </MainLayout>
-          </ProtectedRoute>
-        } />
-
+        <Route path="/dashboard" element={<ProtectedPage><Dashboard /></ProtectedPage>} />
+        <Route path="/goal" element={<ProtectedPage><Goal /></ProtectedPage>} />
+        <Route path="/templates" element={<ProtectedPage><Templates /></ProtectedPage>} />
+        <Route path="/prospects" element={<ProtectedPage><Prospects /></ProtectedPage>} />
+        <Route path="/outbounds" element={<ProtectedPage><Outbounds /></ProtectedPage>} />
+        <Route path="/settings" element={<ProtectedPage><Settings /></ProtectedPage>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
