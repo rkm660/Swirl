@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
+import { ArrowUturnLeftIcon, ClipboardDocumentIcon, LinkIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -14,9 +14,8 @@ interface OutboundProspect {
   location: string
   linkedinUrl: string
   template: string
-  status: 'not_contacted' | 'contacted' | 'connected'
+  status: 'not_contacted' | 'contacted'
   contactedDate?: string
-  connectedDate?: string
 }
 
 export default function Outbounds() {
@@ -69,7 +68,6 @@ export default function Outbounds() {
     switch (status) {
       case 'not_contacted': return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
       case 'contacted': return 'bg-green-50 text-green-700 ring-green-600/20'
-      case 'connected': return 'bg-blue-50 text-blue-700 ring-blue-600/20'
       default: return 'bg-gray-50 text-gray-600 ring-gray-500/10'
     }
   }
@@ -78,7 +76,6 @@ export default function Outbounds() {
     switch (status) {
       case 'not_contacted': return 'Not Contacted'
       case 'contacted': return 'Contacted'
-      case 'connected': return 'Connected'
       default: return status
     }
   }
@@ -94,17 +91,19 @@ export default function Outbounds() {
     }
   }
 
-  const handleConnect = (prospect: OutboundProspect) => {
+  const handleCopyTemplate = (prospect: OutboundProspect) => {
     // Mock template content - in real app this would come from Templates API
     const templateContent = `Hi ${prospect.name.split(' ')[0]}, I'd love to connect with you...`
     
     // Copy template to clipboard
     navigator.clipboard.writeText(templateContent)
-    
-    // Update status to connected
+  }
+
+  const handleConnect = (prospect: OutboundProspect) => {
+    // Update status to contacted
     setOutboundProspects(prev => prev.map(p => 
       p.id === prospect.id 
-        ? { ...p, status: 'connected' as const, connectedDate: new Date().toISOString().split('T')[0] }
+        ? { ...p, status: 'contacted' as const, contactedDate: new Date().toISOString().split('T')[0] }
         : p
     ))
     
@@ -161,7 +160,7 @@ export default function Outbounds() {
                       Status
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Actions
+                      Quick Actions
                     </th>
                   </tr>
                 </thead>
@@ -205,17 +204,17 @@ export default function Outbounds() {
                             'inline-flex flex-col items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
                           )}>
                             <span>{getStatusText(prospect.status)}</span>
-                            {(prospect.contactedDate || prospect.connectedDate) && (
+                            {prospect.contactedDate && (
                               <span className="text-xs opacity-75">
-                                {new Date(prospect.connectedDate || prospect.contactedDate!).toLocaleDateString()}
+                                {new Date(prospect.contactedDate).toLocaleDateString()}
                               </span>
                             )}
                           </span>
-                          {prospect.status !== 'connected' && (
+                          {prospect.status === 'contacted' && (
                             <button
                               onClick={() => toggleContactedStatus(prospect)}
                               className="inline-flex items-center justify-center rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                              title={prospect.status === 'contacted' ? 'Mark as not contacted' : 'Mark as contacted'}
+                              title="Mark as not contacted"
                             >
                               <ArrowUturnLeftIcon className="h-4 w-4" />
                             </button>
@@ -223,14 +222,24 @@ export default function Outbounds() {
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
-                        {prospect.status !== 'connected' && (
+                        <div className="flex space-x-2">
                           <button
-                            onClick={() => handleConnect(prospect)}
-                            className="inline-flex items-center rounded-md bg-primary-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+                            onClick={() => handleCopyTemplate(prospect)}
+                            className="inline-flex items-center justify-center rounded-full p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            title="Copy template to clipboard"
                           >
-                            Connect
+                            <ClipboardDocumentIcon className="h-4 w-4" />
                           </button>
-                        )}
+                          {prospect.status !== 'contacted' && (
+                            <button
+                              onClick={() => handleConnect(prospect)}
+                              className="inline-flex items-center justify-center rounded-full p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                              title="Open LinkedIn profile"
+                            >
+                              <LinkIcon className="h-4 w-4" />
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   ))}
