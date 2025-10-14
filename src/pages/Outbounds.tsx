@@ -101,9 +101,12 @@ export default function Outbounds() {
 
   const handleConnect = (prospect: OutboundProspect) => {
     // Update status to contacted
+    const today = new Date()
+    const localDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+    
     setOutboundProspects(prev => prev.map(p => 
       p.id === prospect.id 
-        ? { ...p, status: 'contacted' as const, contactedDate: new Date().toISOString().split('T')[0] }
+        ? { ...p, status: 'contacted' as const, contactedDate: localDate }
         : p
     ))
     
@@ -113,7 +116,12 @@ export default function Outbounds() {
 
   const toggleContactedStatus = (prospect: OutboundProspect) => {
     const newStatus = prospect.status === 'contacted' ? 'not_contacted' : 'contacted'
-    const newDate = newStatus === 'contacted' ? new Date().toISOString().split('T')[0] : undefined
+    let newDate: string | undefined = undefined
+    
+    if (newStatus === 'contacted') {
+      const today = new Date()
+      newDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+    }
     
     setOutboundProspects(prev => prev.map(p => 
       p.id === prospect.id 
@@ -394,7 +402,7 @@ export default function Outbounds() {
                             <span>{getStatusText(prospect.status)}</span>
                             {prospect.contactedDate && (
                               <span className="text-xs opacity-75">
-                                {new Date(prospect.contactedDate).toLocaleDateString()}
+                                {new Date(prospect.contactedDate + 'T00:00:00').toLocaleDateString()}
                               </span>
                             )}
                           </span>
