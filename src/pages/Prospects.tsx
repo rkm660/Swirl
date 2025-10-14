@@ -12,7 +12,6 @@ interface Prospect {
   followerCount: number
   location: string
   linkedinUrl: string
-  status: 'new' | 'contacted' | 'responded' | 'not_interested'
 }
 
 interface Template {
@@ -31,8 +30,7 @@ export default function Prospects() {
       company: 'Beverage Co',
       followerCount: 1250,
       location: 'New York, NY',
-      linkedinUrl: 'https://linkedin.com/in/sarah-johnson',
-      status: 'new'
+      linkedinUrl: 'https://linkedin.com/in/sarah-johnson'
     },
     {
       id: '2', 
@@ -41,8 +39,7 @@ export default function Prospects() {
       company: 'Tech Solutions',
       followerCount: 890,
       location: 'Newark, NJ',
-      linkedinUrl: 'https://linkedin.com/in/mike-chen',
-      status: 'new'
+      linkedinUrl: 'https://linkedin.com/in/mike-chen'
     },
     {
       id: '3',
@@ -51,44 +48,30 @@ export default function Prospects() {
       company: 'StartupXYZ',
       followerCount: 2100,
       location: 'San Francisco, CA',
-      linkedinUrl: 'https://linkedin.com/in/emily-rodriguez',
-      status: 'contacted'
+      linkedinUrl: 'https://linkedin.com/in/emily-rodriguez'
     }
   ])
 
   // Mock templates - in real app this would come from Templates page/API
   const templates: Template[] = [
-    { id: 'A', name: 'Template A', description: 'Friendly introduction for sales professionals' },
-    { id: 'B', name: 'Template B', description: 'Professional outreach for IT decision makers' },
-    { id: 'C', name: 'Template C', description: 'Casual connection request for marketing roles' },
-    { id: 'D', name: 'Template D', description: 'Industry-specific message for beverage sector' },
-    { id: 'E', name: 'Template E', description: 'Follow-up message for previous contacts' }
+    { id: 'A', name: 'Template A', description: 'friendly for sales pros' },
+    { id: 'B', name: 'Template B', description: 'formal for IT directors' },
+    { id: 'C', name: 'Template C', description: 'casual for marketing roles' },
+    { id: 'D', name: 'Template D', description: 'industry-specific beverage' },
+    { id: 'E', name: 'Template E', description: 'follow-up for previous contacts' }
   ]
 
   const handleQuickAction = (prospectId: string, action: string) => {
     console.log(`Action ${action} for prospect ${prospectId}`)
-    // TODO: Implement actual action logic
-  }
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'new': return 'bg-green-100 text-green-800'
-      case 'contacted': return 'bg-yellow-100 text-yellow-800'
-      case 'responded': return 'bg-blue-100 text-blue-800'
-      case 'not_interested': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
+    if (action === 'X') {
+      // TODO: Move to Discarded page
+      console.log(`Moving prospect ${prospectId} to Discarded`)
+    } else {
+      // TODO: Move to Outbounds page
+      console.log(`Moving prospect ${prospectId} to Outbounds with template ${action}`)
     }
   }
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'new': return 'New'
-      case 'contacted': return 'Contacted'
-      case 'responded': return 'Responded'
-      case 'not_interested': return 'Not Interested'
-      default: return status
-    }
-  }
 
   const formatFollowerCount = (count: number) => {
     if (count >= 1000) {
@@ -130,9 +113,6 @@ export default function Prospects() {
                       Location
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Status
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
                       Quick Actions
                     </th>
                   </tr>
@@ -164,20 +144,6 @@ export default function Prospects() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
                         {prospect.location}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-xs">
-                        <span className={classNames(
-                          prospect.status === 'new'
-                            ? 'bg-green-50 text-green-700 ring-green-600/20'
-                            : prospect.status === 'contacted'
-                            ? 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-                            : prospect.status === 'responded'
-                            ? 'bg-blue-50 text-blue-700 ring-blue-600/20'
-                            : 'bg-red-50 text-red-700 ring-red-600/20',
-                          'inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
-                        )}>
-                          {getStatusText(prospect.status)}
-                        </span>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
                         <div className="flex space-x-1">

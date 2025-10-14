@@ -4,7 +4,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-interface OutboundProspect {
+interface DiscardedProspect {
   id: string
   name: string
   title: string
@@ -12,47 +12,31 @@ interface OutboundProspect {
   followerCount: number
   location: string
   linkedinUrl: string
-  template: string
-  status: 'not_contacted' | 'contacted'
-  contactedDate?: string
+  discardedDate: string
 }
 
-export default function Outbounds() {
+export default function Discarded() {
   // Mock data - in real app this would come from API
-  const [outboundProspects] = useState<OutboundProspect[]>([
+  const [discardedProspects] = useState<DiscardedProspect[]>([
     {
       id: '1',
-      name: 'Sarah Johnson',
-      title: 'Sales Director',
-      company: 'Beverage Co',
-      followerCount: 1250,
-      location: 'New York, NY',
-      linkedinUrl: 'https://linkedin.com/in/sarah-johnson',
-      template: 'A',
-      status: 'not_contacted'
+      name: 'John Smith',
+      title: 'VP of Sales',
+      company: 'Old Corp',
+      followerCount: 500,
+      location: 'Boston, MA',
+      linkedinUrl: 'https://linkedin.com/in/john-smith',
+      discardedDate: '2024-03-20'
     },
     {
       id: '2', 
-      name: 'Mike Chen',
-      title: 'IT Director',
-      company: 'Tech Solutions',
-      followerCount: 890,
-      location: 'Newark, NJ',
-      linkedinUrl: 'https://linkedin.com/in/mike-chen',
-      template: 'B',
-      status: 'contacted',
-      contactedDate: '2024-03-20'
-    },
-    {
-      id: '3',
-      name: 'Emily Rodriguez',
-      title: 'Marketing Manager',
-      company: 'StartupXYZ',
-      followerCount: 2100,
-      location: 'San Francisco, CA',
-      linkedinUrl: 'https://linkedin.com/in/emily-rodriguez',
-      template: 'C',
-      status: 'not_contacted'
+      name: 'Lisa Wang',
+      title: 'Marketing Director',
+      company: 'Legacy Inc',
+      followerCount: 750,
+      location: 'Chicago, IL',
+      linkedinUrl: 'https://linkedin.com/in/lisa-wang',
+      discardedDate: '2024-03-19'
     }
   ])
 
@@ -63,28 +47,12 @@ export default function Outbounds() {
     return count.toString()
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'not_contacted': return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-      case 'contacted': return 'bg-green-50 text-green-700 ring-green-600/20'
-      default: return 'bg-gray-50 text-gray-600 ring-gray-500/10'
-    }
-  }
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'not_contacted': return 'Not Contacted'
-      case 'contacted': return 'Contacted'
-      default: return status
-    }
-  }
-
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Outbounds</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Discarded</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Track your outbound campaigns and outreach status
+          Prospects that were marked as not interested
         </p>
       </div>
 
@@ -111,15 +79,12 @@ export default function Outbounds() {
                       Location
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Template
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Status
+                      Discarded Date
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {outboundProspects.map((prospect) => (
+                  {discardedProspects.map((prospect) => (
                     <tr key={prospect.id} className="hover:bg-gray-50 transition-colors">
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6">
                         <div className="font-medium text-gray-900">{prospect.name}</div>
@@ -146,23 +111,8 @@ export default function Outbounds() {
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
                         {prospect.location}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-xs">
-                        <span className="inline-flex items-center rounded-md bg-primary-100 px-2 py-1 text-xs font-medium text-primary-700">
-                          Template {prospect.template}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-xs">
-                        <span className={classNames(
-                          getStatusColor(prospect.status),
-                          'inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
-                        )}>
-                          {getStatusText(prospect.status)}
-                        </span>
-                        {prospect.contactedDate && (
-                          <div className="text-xs text-gray-500 mt-1">
-                            {new Date(prospect.contactedDate).toLocaleDateString()}
-                          </div>
-                        )}
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
+                        {new Date(prospect.discardedDate).toLocaleDateString()}
                       </td>
                     </tr>
                   ))}

@@ -64,17 +64,18 @@ export default function Templates() {
                 </div>
               </div>
 
-              {/* Description field */}
+              {/* Name field */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Description
+                  Name
                 </label>
                 <input
                   type="text"
                   value={template.description}
                   onChange={(e) => updateTemplate(template.id, 'description', e.target.value)}
-                  placeholder="Brief description of when to use this template..."
+                  placeholder="e.g. informal for marketing execs"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
+                  maxLength={100}
                 />
               </div>
 
