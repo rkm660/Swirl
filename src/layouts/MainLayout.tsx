@@ -22,6 +22,7 @@ const navigation = [
   { name: 'Templates', to: '/templates', icon: DocumentTextIcon },
   { name: 'Prospects', to: '/prospects', icon: UserGroupIcon },
   { name: 'Outbounds', to: '/outbounds', icon: PaperAirplaneIcon },
+  { name: 'Discarded', to: '/discarded', icon: UserGroupIcon },
   { name: 'Settings', to: '/settings', icon: Cog6ToothIcon },
 ]
 

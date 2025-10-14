@@ -80,6 +80,17 @@ export default function Prospects() {
     return count.toString()
   }
 
+  const getTemplateColor = (templateId: string) => {
+    switch (templateId) {
+      case 'A': return 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+      case 'B': return 'bg-green-100 text-green-700 hover:bg-green-200'
+      case 'C': return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+      case 'D': return 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+      case 'E': return 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200'
+      default: return 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+    }
+  }
+
 
   return (
     <div className="space-y-6">
@@ -150,12 +161,12 @@ export default function Prospects() {
                           {['A', 'B', 'C', 'D', 'E'].map((templateId) => {
                             const template = templates.find(t => t.id === templateId)
                             return (
-                              <button
-                                key={templateId}
-                                onClick={() => handleQuickAction(prospect.id, templateId)}
-                                className="relative group bg-primary-100 text-primary-700 hover:bg-primary-200 px-2 py-1 rounded text-xs font-medium transition-colors"
-                                title={template?.description || `Template ${templateId}`}
-                              >
+                          <button
+                            key={templateId}
+                            onClick={() => handleQuickAction(prospect.id, templateId)}
+                            className={`relative group px-2 py-1 rounded text-xs font-medium transition-colors ${getTemplateColor(templateId)}`}
+                            title={template?.description || `Template ${templateId}`}
+                          >
                                 {templateId}
                                 {/* Tooltip */}
                                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">

@@ -12,6 +12,7 @@ import Goal from './pages/Goal'
 import Templates from './pages/Templates'
 import Prospects from './pages/Prospects'
 import Outbounds from './pages/Outbounds'
+import Discarded from './pages/Discarded'
 import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
 
@@ -31,16 +32,17 @@ function App() {
   return (
     <>
       <AuthCallback />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<ProtectedPage><Dashboard /></ProtectedPage>} />
-        <Route path="/goal" element={<ProtectedPage><Goal /></ProtectedPage>} />
-        <Route path="/templates" element={<ProtectedPage><Templates /></ProtectedPage>} />
-        <Route path="/prospects" element={<ProtectedPage><Prospects /></ProtectedPage>} />
-        <Route path="/outbounds" element={<ProtectedPage><Outbounds /></ProtectedPage>} />
-        <Route path="/settings" element={<ProtectedPage><Settings /></ProtectedPage>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<ProtectedPage><Dashboard /></ProtectedPage>} />
+            <Route path="/goal" element={<ProtectedPage><Goal /></ProtectedPage>} />
+            <Route path="/templates" element={<ProtectedPage><Templates /></ProtectedPage>} />
+            <Route path="/prospects" element={<ProtectedPage><Prospects /></ProtectedPage>} />
+            <Route path="/outbounds" element={<ProtectedPage><Outbounds /></ProtectedPage>} />
+            <Route path="/discarded" element={<ProtectedPage><Discarded /></ProtectedPage>} />
+            <Route path="/settings" element={<ProtectedPage><Settings /></ProtectedPage>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
     </>
   )
 }

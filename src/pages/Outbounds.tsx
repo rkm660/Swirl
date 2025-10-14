@@ -79,6 +79,17 @@ export default function Outbounds() {
     }
   }
 
+  const getTemplateColor = (templateId: string) => {
+    switch (templateId) {
+      case 'A': return 'bg-blue-100 text-blue-700'
+      case 'B': return 'bg-green-100 text-green-700'
+      case 'C': return 'bg-yellow-100 text-yellow-700'
+      case 'D': return 'bg-purple-100 text-purple-700'
+      case 'E': return 'bg-indigo-100 text-indigo-700'
+      default: return 'bg-gray-100 text-gray-700'
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -147,22 +158,22 @@ export default function Outbounds() {
                         {prospect.location}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
-                        <span className="inline-flex items-center rounded-md bg-primary-100 px-2 py-1 text-xs font-medium text-primary-700">
+                        <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${getTemplateColor(prospect.template)}`}>
                           Template {prospect.template}
                         </span>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
                         <span className={classNames(
                           getStatusColor(prospect.status),
-                          'inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
+                          'inline-flex flex-col items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
                         )}>
-                          {getStatusText(prospect.status)}
+                          <span>{getStatusText(prospect.status)}</span>
+                          {prospect.contactedDate && (
+                            <span className="text-xs opacity-75">
+                              {new Date(prospect.contactedDate).toLocaleDateString()}
+                            </span>
+                          )}
                         </span>
-                        {prospect.contactedDate && (
-                          <div className="text-xs text-gray-500 mt-1">
-                            {new Date(prospect.contactedDate).toLocaleDateString()}
-                          </div>
-                        )}
                       </td>
                     </tr>
                   ))}
