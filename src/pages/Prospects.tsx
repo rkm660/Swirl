@@ -157,16 +157,16 @@ export default function Prospects() {
                         {prospect.location}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
-                        <div className="flex space-x-1">
+                        <div className="flex items-center space-x-1">
                           {['A', 'B', 'C', 'D', 'E'].map((templateId) => {
                             const template = templates.find(t => t.id === templateId)
                             return (
-                          <button
-                            key={templateId}
-                            onClick={() => handleQuickAction(prospect.id, templateId)}
-                            className={`relative group px-2 py-1 rounded text-xs font-medium transition-colors ${getTemplateColor(templateId)}`}
-                            title={template?.description || `Template ${templateId}`}
-                          >
+                              <button
+                                key={templateId}
+                                onClick={() => handleQuickAction(prospect.id, templateId)}
+                                className={`relative group px-2 py-1 rounded text-xs font-medium transition-colors ${getTemplateColor(templateId)}`}
+                                title={template?.description || `Template ${templateId}`}
+                              >
                                 {templateId}
                                 {/* Tooltip */}
                                 <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
@@ -176,13 +176,14 @@ export default function Prospects() {
                               </button>
                             )
                           })}
-                              <button
-                                onClick={() => handleQuickAction(prospect.id, 'X')}
-                                className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded-full text-xs font-bold transition-colors border border-red-200"
-                                title="Mark as not interested"
-                              >
-                                ✕
-                              </button>
+                          <div className="w-px h-4 bg-gray-300 mx-1"></div>
+                          <button
+                            onClick={() => handleQuickAction(prospect.id, 'X')}
+                            className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded-full text-xs font-bold transition-colors border border-red-200"
+                            title="Mark as not interested"
+                          >
+                            ✕
+                          </button>
                         </div>
                       </td>
                     </tr>
