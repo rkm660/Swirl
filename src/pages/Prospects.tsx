@@ -10,9 +10,26 @@ export default function Prospects() {
 
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
-          <div className="text-center">
-            <div className="text-sm text-gray-500">
-              Prospect management features coming soon
+          <div className="space-y-4">
+            <div className="text-center">
+              <div className="text-sm text-gray-500 mb-4">
+                Prospect Profile Prototype
+              </div>
+            </div>
+            
+            <div className="w-full h-[600px] border border-gray-200 rounded-lg overflow-hidden">
+              <iframe
+                src="https://uk.linkedin.com/in/karenbevan"
+                title="LinkedIn Profile - Karen Bevan"
+                className="w-full h-full"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+              />
+            </div>
+            
+            <div className="text-center">
+              <div className="text-xs text-gray-400">
+                Note: LinkedIn may block iframe embedding. This is a prototype demonstration.
+              </div>
             </div>
           </div>
         </div>
