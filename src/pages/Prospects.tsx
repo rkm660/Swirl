@@ -2,11 +2,10 @@ import { useState } from 'react'
 
 interface Prospect {
   id: string
-  fullName: string
+  name: string
   title: string
-  followerCount: number
+  company: string
   location: string
-  bio: string
   linkedinUrl: string
   status: 'new' | 'contacted' | 'responded' | 'not_interested'
 }
@@ -22,31 +21,28 @@ export default function Prospects() {
   const [prospects] = useState<Prospect[]>([
     {
       id: '1',
-      fullName: 'Sarah Johnson',
-      title: 'Sales Director at Beverage Co',
-      followerCount: 1250,
+      name: 'Sarah Johnson',
+      title: 'Sales Director',
+      company: 'Beverage Co',
       location: 'New York, NY',
-      bio: 'Experienced sales leader with 8+ years in the beverage industry. Passionate about building relationships and driving revenue growth through strategic partnerships and innovative sales strategies.',
       linkedinUrl: 'https://linkedin.com/in/sarah-johnson',
       status: 'new'
     },
     {
       id: '2', 
-      fullName: 'Mike Chen',
-      title: 'IT Director at Tech Solutions',
-      followerCount: 890,
+      name: 'Mike Chen',
+      title: 'IT Director',
+      company: 'Tech Solutions',
       location: 'Newark, NJ',
-      bio: 'Technology executive focused on digital transformation and cloud infrastructure. Leading teams to deliver scalable solutions that drive business efficiency and innovation.',
       linkedinUrl: 'https://linkedin.com/in/mike-chen',
       status: 'new'
     },
     {
       id: '3',
-      fullName: 'Emily Rodriguez',
-      title: 'Marketing Manager at StartupXYZ',
-      followerCount: 2100,
+      name: 'Emily Rodriguez',
+      title: 'Marketing Manager',
+      company: 'StartupXYZ',
       location: 'San Francisco, CA',
-      bio: 'Growth marketing specialist helping startups scale through data-driven campaigns and creative content strategies. Expert in social media, email marketing, and conversion optimization.',
       linkedinUrl: 'https://linkedin.com/in/emily-rodriguez',
       status: 'contacted'
     }
@@ -86,17 +82,6 @@ export default function Prospects() {
     }
   }
 
-  const truncateBio = (bio: string, maxLength: number = 100) => {
-    if (bio.length <= maxLength) return bio
-    return bio.substring(0, maxLength) + '...'
-  }
-
-  const formatFollowerCount = (count: number) => {
-    if (count >= 1000) {
-      return (count / 1000).toFixed(1) + 'K'
-    }
-    return count.toString()
-  }
 
   return (
     <div className="space-y-6">
@@ -108,33 +93,24 @@ export default function Prospects() {
       </div>
 
       <div className="bg-white shadow overflow-hidden sm:rounded-md">
-        <div className="px-4 py-5 sm:px-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Prospect List
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            {prospects.length} prospects found
-          </p>
-        </div>
-        
-        <div>
+        <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Full Name
+                  Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Title
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Followers
+                  Company
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Location
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Bio
+                  Status
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Quick Actions
@@ -149,13 +125,13 @@ export default function Prospects() {
                       <div className="flex-shrink-0 h-10 w-10">
                         <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
                           <span className="text-sm font-medium text-primary-600">
-                            {prospect.fullName.split(' ').map(n => n[0]).join('')}
+                            {prospect.name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">
-                          {prospect.fullName}
+                          {prospect.name}
                         </div>
                         <div className="text-sm text-gray-500">
                           <a 
@@ -173,16 +149,16 @@ export default function Prospects() {
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     {prospect.title}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {formatFollowerCount(prospect.followerCount)}
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {prospect.company}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {prospect.location}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-500 max-w-xs">
-                    <div className="break-words" title={prospect.bio}>
-                      {prospect.bio}
-                    </div>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(prospect.status)}`}>
+                      {getStatusText(prospect.status)}
+                    </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     <div className="flex space-x-1">
