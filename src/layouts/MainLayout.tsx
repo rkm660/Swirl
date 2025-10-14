@@ -72,7 +72,7 @@ export default function MainLayout() {
             </button>
           ) : (
             <Link to="/dashboard" className="flex items-center">
-              <img src="/logo.svg" alt="EverLeads" className="h-9 w-auto" />
+              <img src="/logo.svg" alt="EverLeads" className="h-12 w-auto" />
             </Link>
           )}
         </div>
