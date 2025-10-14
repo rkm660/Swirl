@@ -50,7 +50,6 @@ export default function Discarded() {
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState('')
-  const [companyFilter, setCompanyFilter] = useState('')
   const [sortField, setSortField] = useState<'name' | 'title' | 'company' | 'followers' | 'location' | 'date' | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
@@ -118,15 +117,19 @@ export default function Discarded() {
   // Filter and sort prospects
   const filteredAndSortedProspects = useMemo(() => {
     let filtered = discardedProspects.filter(prospect => {
-      const matchesSearch = prospect.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           prospect.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           prospect.company.toLowerCase().includes(searchQuery.toLowerCase())
-      const matchesCompany = !companyFilter || prospect.company.toLowerCase().includes(companyFilter.toLowerCase())
-      return matchesSearch && matchesCompany
+      if (!searchQuery.trim()) return true
+      
+      const searchLower = searchQuery.toLowerCase()
+      return prospect.name.toLowerCase().includes(searchLower) ||
+             prospect.title.toLowerCase().includes(searchLower) ||
+             prospect.company.toLowerCase().includes(searchLower) ||
+             prospect.location.toLowerCase().includes(searchLower) ||
+             prospect.followerCount.toString().includes(searchLower) ||
+             new Date(prospect.discardedDate).toLocaleDateString().toLowerCase().includes(searchLower)
     })
 
     return getSortedProspects(filtered)
-  }, [discardedProspects, searchQuery, companyFilter, sortField, sortDirection])
+  }, [discardedProspects, searchQuery, sortField, sortDirection])
 
   return (
     <div className="space-y-6">
@@ -137,9 +140,9 @@ export default function Discarded() {
         </p>
       </div>
 
-      {/* Search and Filters */}
-      <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
-        <div className="relative flex-1">
+      {/* Search */}
+      <div className="mt-6">
+        <div className="relative">
           <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
             <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
           </div>
@@ -149,15 +152,6 @@ export default function Discarded() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full rounded-md border border-gray-300 pl-9 pr-3 py-1.5 text-xs text-gray-900 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-          />
-        </div>
-        <div className="flex gap-2 sm:gap-4">
-          <input
-            type="text"
-            placeholder="Filter by company..."
-            value={companyFilter}
-            onChange={(e) => setCompanyFilter(e.target.value)}
-            className="flex-1 sm:flex-none block rounded-md border border-gray-300 px-3 py-1.5 text-xs text-gray-900 focus:border-primary-500 focus:ring-primary-500"
           />
         </div>
       </div>
