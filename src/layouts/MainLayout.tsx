@@ -7,17 +7,17 @@ import {
   Bars3Icon,
   XMarkIcon,
   QuestionMarkCircleIcon,
-  TargetIcon,
+  TagIcon,
   DocumentTextIcon,
   UserGroupIcon,
   PaperAirplaneIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
-import logo from '../assets/logo.png'
+// import logo from '/logo.svg'
 
 const navigation = [
   { name: 'Dashboard', to: '/dashboard', icon: HomeIcon },
-  { name: 'Goal', to: '/goal', icon: TargetIcon },
+  { name: 'Goal', to: '/goal', icon: TagIcon },
   { name: 'Templates', to: '/templates', icon: DocumentTextIcon },
   { name: 'Prospects', to: '/prospects', icon: UserGroupIcon },
   { name: 'Outbounds', to: '/outbounds', icon: PaperAirplaneIcon },
@@ -72,7 +72,7 @@ export default function MainLayout() {
             </button>
           ) : (
             <Link to="/dashboard" className="flex items-center">
-              <img src={logo} alt="EverLeads" className="h-9 w-auto" />
+              <img src="/logo.svg" alt="EverLeads" className="h-9 w-auto" />
             </Link>
           )}
         </div>
