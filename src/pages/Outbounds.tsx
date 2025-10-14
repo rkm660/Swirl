@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { ArrowUturnLeftIcon, ClipboardDocumentIcon, LinkIcon } from '@heroicons/react/24/outline'
+import { useState, useMemo } from 'react'
+import { ArrowUturnLeftIcon, ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -122,6 +122,90 @@ export default function Outbounds() {
     ))
   }
 
+  // Search and filter state
+  const [searchQuery, setSearchQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('')
+  const [sortField, setSortField] = useState<'name' | 'title' | 'company' | 'followers' | 'location' | 'template' | 'status' | null>(null)
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
+
+  const handleSort = (field: 'name' | 'title' | 'company' | 'followers' | 'location' | 'template' | 'status') => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortField(field)
+      setSortDirection('asc')
+    }
+  }
+
+  const getSortedProspects = (prospects: OutboundProspect[]) => {
+    if (!sortField) return prospects
+
+    return [...prospects].sort((a, b) => {
+      let aValue: string | number
+      let bValue: string | number
+
+      switch (sortField) {
+        case 'name':
+          aValue = a.name.toLowerCase()
+          bValue = b.name.toLowerCase()
+          break
+        case 'title':
+          aValue = a.title.toLowerCase()
+          bValue = b.title.toLowerCase()
+          break
+        case 'company':
+          aValue = a.company.toLowerCase()
+          bValue = b.company.toLowerCase()
+          break
+        case 'followers':
+          aValue = a.followerCount
+          bValue = b.followerCount
+          break
+        case 'location':
+          aValue = a.location.toLowerCase()
+          bValue = b.location.toLowerCase()
+          break
+        case 'template':
+          aValue = a.template
+          bValue = b.template
+          break
+        case 'status':
+          aValue = a.status
+          bValue = b.status
+          break
+        default:
+          return 0
+      }
+
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        if (sortDirection === 'asc') {
+          return aValue.localeCompare(bValue)
+        } else {
+          return bValue.localeCompare(aValue)
+        }
+      } else {
+        if (sortDirection === 'asc') {
+          return (aValue as number) - (bValue as number)
+        } else {
+          return (bValue as number) - (aValue as number)
+        }
+      }
+    })
+  }
+
+  // Filter and sort prospects
+  const filteredAndSortedProspects = useMemo(() => {
+    let filtered = outboundProspects.filter(prospect => {
+      const matchesSearch = prospect.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           prospect.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                           prospect.company.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchesStatus = !statusFilter || prospect.status === statusFilter
+      return matchesSearch && matchesStatus
+    })
+
+    return getSortedProspects(filtered)
+  }, [outboundProspects, searchQuery, statusFilter, sortField, sortDirection])
+
   return (
     <div className="space-y-6">
       <div>
@@ -131,6 +215,33 @@ export default function Outbounds() {
         </p>
       </div>
 
+      {/* Search and Filters */}
+      <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+        <div className="relative flex-1">
+          <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+            <MagnifyingGlassIcon className="h-4 w-4 text-gray-400" aria-hidden="true" />
+          </div>
+          <input
+            type="text"
+            placeholder="Search outbounds..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="block w-full rounded-md border border-gray-300 pl-9 pr-3 py-1.5 text-xs text-gray-900 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+          />
+        </div>
+        <div className="flex gap-2 sm:gap-4">
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="flex-1 sm:flex-none block rounded-md border border-gray-300 px-3 py-1.5 text-xs text-gray-900 focus:border-primary-500 focus:ring-primary-500"
+          >
+            <option value="">All Statuses</option>
+            <option value="not_contacted">Not Contacted</option>
+            <option value="contacted">Contacted</option>
+          </select>
+        </div>
+      </div>
+
       <div className="mt-8 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
@@ -138,26 +249,103 @@ export default function Outbounds() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-6">
-                      Name
+                    <th 
+                      scope="col" 
+                      className="py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100 sm:pl-6"
+                      onClick={() => handleSort('name')}
+                    >
+                      <div className="flex items-center">
+                        Name
+                        {sortField === 'name' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Title
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('title')}
+                    >
+                      <div className="flex items-center">
+                        Title
+                        {sortField === 'title' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Company
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('company')}
+                    >
+                      <div className="flex items-center">
+                        Company
+                        {sortField === 'company' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Followers
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('followers')}
+                    >
+                      <div className="flex items-center">
+                        Followers
+                        {sortField === 'followers' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Location
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('location')}
+                    >
+                      <div className="flex items-center">
+                        Location
+                        {sortField === 'location' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Template
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('template')}
+                    >
+                      <div className="flex items-center">
+                        Template
+                        {sortField === 'template' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
-                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Status
+                    <th 
+                      scope="col" 
+                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
+                      onClick={() => handleSort('status')}
+                    >
+                      <div className="flex items-center">
+                        Status
+                        {sortField === 'status' && (
+                          <span className="ml-1">
+                            {sortDirection === 'asc' ? '↑' : '↓'}
+                          </span>
+                        )}
+                      </div>
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
                       Quick Actions
@@ -165,7 +353,7 @@ export default function Outbounds() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {outboundProspects.map((prospect) => (
+                  {filteredAndSortedProspects.map((prospect) => (
                     <tr key={prospect.id} className="hover:bg-gray-50 transition-colors">
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6">
                         <div className="font-medium text-gray-900">{prospect.name}</div>

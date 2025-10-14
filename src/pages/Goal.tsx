@@ -47,7 +47,7 @@ export default function Goal() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="e.g., sales professionals at beverage companies"
+                placeholder="e.g. sales professionals at beverage companies"
                 className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full text-lg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
               />
             </div>
@@ -70,9 +70,9 @@ export default function Goal() {
               </button>
             </div>
 
-            {/* Examples */}
-            <div className="mt-8">
-              <p className="text-sm text-gray-600 mb-3">Try these examples:</p>
+                {/* Examples */}
+                <div className="mt-8">
+                  <p className="text-sm text-gray-600 mb-3">try these examples:</p>
               <div className="flex flex-wrap gap-2">
                 {[
                   "Sales professionals at beverage companies",
