@@ -1,5 +1,9 @@
 import { useState } from 'react'
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
+}
+
 interface Prospect {
   id: string
   name: string
@@ -92,107 +96,107 @@ export default function Prospects() {
         </p>
       </div>
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-md">
+      <div className="mt-8 flow-root">
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Company
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Location
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Quick Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {prospects.map((prospect) => (
-                <tr key={prospect.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <div className="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
-                          <span className="text-sm font-medium text-primary-600">
-                            {prospect.name.split(' ').map(n => n[0]).join('')}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {prospect.name}
-                        </div>
-                        <div className="text-sm text-gray-500">
+          <div className="inline-block min-w-full align-middle">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead className="bg-gray-50">
+                  <tr>
+                    <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-xs font-semibold text-gray-900 sm:pl-6">
+                      Name
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Title
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Company
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Location
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Status
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Quick Actions
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white">
+                  {prospects.map((prospect) => (
+                    <tr key={prospect.id} className="hover:bg-gray-50 transition-colors">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-xs sm:pl-6">
+                        <div className="font-medium text-gray-900">{prospect.name}</div>
+                        <div className="text-gray-500">
                           <a 
                             href={prospect.linkedinUrl} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-primary-600 hover:text-primary-500"
+                            className="hover:text-primary-600"
                           >
                             View LinkedIn
                           </a>
                         </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {prospect.title}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                    {prospect.company}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {prospect.location}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(prospect.status)}`}>
-                      {getStatusText(prospect.status)}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <div className="flex space-x-1">
-                      {['A', 'B', 'C', 'D', 'E'].map((templateId) => {
-                        const template = templates.find(t => t.id === templateId)
-                        return (
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-900">
+                        {prospect.title}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-900">
+                        {prospect.company}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
+                        {prospect.location}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs">
+                        <span className={classNames(
+                          prospect.status === 'new'
+                            ? 'bg-green-50 text-green-700 ring-green-600/20'
+                            : prospect.status === 'contacted'
+                            ? 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+                            : prospect.status === 'responded'
+                            ? 'bg-blue-50 text-blue-700 ring-blue-600/20'
+                            : 'bg-red-50 text-red-700 ring-red-600/20',
+                          'inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
+                        )}>
+                          {getStatusText(prospect.status)}
+                        </span>
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
+                        <div className="flex space-x-1">
+                          {['A', 'B', 'C', 'D', 'E'].map((templateId) => {
+                            const template = templates.find(t => t.id === templateId)
+                            return (
+                              <button
+                                key={templateId}
+                                onClick={() => handleQuickAction(prospect.id, templateId)}
+                                className="relative group bg-primary-100 text-primary-700 hover:bg-primary-200 px-2 py-1 rounded text-xs font-medium transition-colors"
+                                title={template?.description || `Template ${templateId}`}
+                              >
+                                {templateId}
+                                {/* Tooltip */}
+                                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
+                                  {template?.description || `Template ${templateId}`}
+                                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                                </div>
+                              </button>
+                            )
+                          })}
                           <button
-                            key={templateId}
-                            onClick={() => handleQuickAction(prospect.id, templateId)}
-                            className="relative group bg-primary-100 text-primary-700 hover:bg-primary-200 px-2 py-1 rounded text-xs font-medium transition-colors"
-                            title={template?.description || `Template ${templateId}`}
+                            onClick={() => handleQuickAction(prospect.id, 'X')}
+                            className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded text-xs font-medium transition-colors"
+                            title="Mark as not interested"
                           >
-                            {templateId}
-                            {/* Tooltip */}
-                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-gray-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
-                              {template?.description || `Template ${templateId}`}
-                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
-                            </div>
+                            X
                           </button>
-                        )
-                      })}
-                      <button
-                        onClick={() => handleQuickAction(prospect.id, 'X')}
-                        className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded text-xs font-medium transition-colors"
-                        title="Mark as not interested"
-                      >
-                        X
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>
