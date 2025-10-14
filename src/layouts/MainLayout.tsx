@@ -1,5 +1,5 @@
-import { Fragment, useState, useEffect } from 'react'
-import { Outlet, NavLink, Link } from 'react-router-dom'
+import { Fragment, useState, useEffect, ReactNode } from 'react'
+import { NavLink, Link } from 'react-router-dom'
 import { useAuth0 } from '@auth0/auth0-react'
 import { Menu, Transition } from '@headlessui/react'
 import {
@@ -29,7 +29,11 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function MainLayout() {
+interface MainLayoutProps {
+  children: ReactNode
+}
+
+export default function MainLayout({ children }: MainLayoutProps) {
   const { user, logout } = useAuth0()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobileView, setIsMobileView] = useState(false)
@@ -170,7 +174,7 @@ export default function MainLayout() {
       )}>
         <main className="p-4">
           <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <Outlet />
+            {children}
           </div>
         </main>
       </div>
