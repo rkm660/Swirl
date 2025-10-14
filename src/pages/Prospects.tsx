@@ -9,6 +9,7 @@ interface Prospect {
   name: string
   title: string
   company: string
+  followerCount: number
   location: string
   linkedinUrl: string
   status: 'new' | 'contacted' | 'responded' | 'not_interested'
@@ -28,6 +29,7 @@ export default function Prospects() {
       name: 'Sarah Johnson',
       title: 'Sales Director',
       company: 'Beverage Co',
+      followerCount: 1250,
       location: 'New York, NY',
       linkedinUrl: 'https://linkedin.com/in/sarah-johnson',
       status: 'new'
@@ -37,6 +39,7 @@ export default function Prospects() {
       name: 'Mike Chen',
       title: 'IT Director',
       company: 'Tech Solutions',
+      followerCount: 890,
       location: 'Newark, NJ',
       linkedinUrl: 'https://linkedin.com/in/mike-chen',
       status: 'new'
@@ -46,6 +49,7 @@ export default function Prospects() {
       name: 'Emily Rodriguez',
       title: 'Marketing Manager',
       company: 'StartupXYZ',
+      followerCount: 2100,
       location: 'San Francisco, CA',
       linkedinUrl: 'https://linkedin.com/in/emily-rodriguez',
       status: 'contacted'
@@ -86,6 +90,13 @@ export default function Prospects() {
     }
   }
 
+  const formatFollowerCount = (count: number) => {
+    if (count >= 1000) {
+      return (count / 1000).toFixed(1) + 'K'
+    }
+    return count.toString()
+  }
+
 
   return (
     <div className="space-y-6">
@@ -111,6 +122,9 @@ export default function Prospects() {
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
                       Company
+                    </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Followers
                     </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
                       Location
@@ -144,6 +158,9 @@ export default function Prospects() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-900">
                         {prospect.company}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
+                        {formatFollowerCount(prospect.followerCount)}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
                         {prospect.location}
