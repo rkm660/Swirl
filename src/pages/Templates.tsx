@@ -1,21 +1,107 @@
+import { useState } from 'react'
+import { LockClosedIcon } from '@heroicons/react/24/outline'
+
+interface Template {
+  id: string
+  name: string
+  content: string
+}
+
 export default function Templates() {
+  const [templates, setTemplates] = useState<Template[]>([
+    { id: 'A', name: 'Template A', content: '' },
+    { id: 'B', name: 'Template B', content: '' },
+    { id: 'C', name: 'Template C', content: '' },
+    { id: 'D', name: 'Template D', content: '' },
+    { id: 'E', name: 'Template E', content: '' },
+  ])
+
+  const updateTemplate = (id: string, content: string) => {
+    setTemplates(prev => prev.map(t => t.id === id ? { ...t, content } : t))
+  }
+
+  const getCharacterCount = (content: string) => content.length
+  const isOverLimit = (content: string) => content.length > 300
+
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Templates</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Manage your email and message templates
+          LinkedIn connection request templates with personal notes
         </p>
       </div>
 
-      <div className="bg-white shadow rounded-lg">
-        <div className="px-4 py-5 sm:p-6">
-          <div className="text-center">
-            <div className="text-sm text-gray-500">
-              Template management features coming soon
-            </div>
+      {/* Premium notice */}
+      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-4">
+        <div className="flex items-center">
+          <LockClosedIcon className="h-5 w-5 text-yellow-600 mr-2" />
+          <div>
+            <h3 className="text-sm font-medium text-yellow-800">Premium Feature</h3>
+            <p className="text-sm text-yellow-700">
+              LinkedIn personal note templates are available for premium users only. 
+              Upgrade to access this feature.
+            </p>
           </div>
         </div>
+      </div>
+
+      {/* Templates */}
+      <div className="space-y-6">
+        {templates.map((template) => (
+          <div key={template.id} className="bg-white shadow rounded-lg">
+            <div className="px-4 py-5 sm:p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-medium text-gray-900">{template.name}</h3>
+                <div className="flex items-center space-x-2">
+                  <span className={`text-sm font-medium ${
+                    isOverLimit(template.content) ? 'text-red-600' : 'text-gray-500'
+                  }`}>
+                    {getCharacterCount(template.content)}/300
+                  </span>
+                  <LockClosedIcon className="h-4 w-4 text-gray-400" />
+                </div>
+              </div>
+
+              <div className="relative">
+                <textarea
+                  value={template.content}
+                  onChange={(e) => updateTemplate(template.id, e.target.value)}
+                  placeholder="Hi {first_name}, I'd love to connect with you..."
+                  className={`w-full px-3 py-2 border rounded-md resize-none ${
+                    isOverLimit(template.content) 
+                      ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
+                      : 'border-gray-300 focus:ring-primary-500 focus:border-primary-500'
+                  }`}
+                  rows={4}
+                  maxLength={300}
+                />
+                
+                {/* Character limit indicator */}
+                {isOverLimit(template.content) && (
+                  <div className="absolute bottom-2 right-2 text-xs text-red-600 font-medium">
+                    Character limit exceeded
+                  </div>
+                )}
+              </div>
+
+              {/* Variable help */}
+              <div className="mt-3 p-3 bg-blue-50 rounded-md">
+                <p className="text-sm text-blue-800">
+                  <strong>💡 Tip:</strong> Use <code className="bg-blue-100 px-1 rounded">{'{first_name}'}</code> to 
+                  automatically insert the prospect's first name from their LinkedIn profile.
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Save button */}
+      <div className="flex justify-end">
+        <button className="bg-primary-600 text-white px-6 py-2 rounded-md font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+          Save Templates
+        </button>
       </div>
     </div>
   )
