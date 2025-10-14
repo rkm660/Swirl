@@ -1,5 +1,6 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Outlet, NavLink, Link } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import { Menu, Transition } from '@headlessui/react'
 import {
   HomeIcon,
@@ -29,6 +30,7 @@ function classNames(...classes: string[]) {
 }
 
 export default function MainLayout() {
+  const { user, logout } = useAuth0()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobileView, setIsMobileView] = useState(false)
 
@@ -81,7 +83,15 @@ export default function MainLayout() {
           <div>
             <Menu.Button className="flex items-center rounded-full bg-white text-sm">
               <span className="sr-only">Open user menu</span>
-              <UserCircleIcon className="h-7 w-7 text-gray-400" />
+              {user?.picture ? (
+                <img
+                  className="h-7 w-7 rounded-full"
+                  src={user.picture}
+                  alt={user?.name || 'User avatar'}
+                />
+              ) : (
+                <UserCircleIcon className="h-7 w-7 text-gray-400" />
+              )}
             </Menu.Button>
           </div>
           <Transition
@@ -97,6 +107,7 @@ export default function MainLayout() {
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={() => logout()}
                     className={classNames(
                       active ? '' : '',
                       'block w-full bg-white px-4 py-2 text-left text-xs text-gray-700'

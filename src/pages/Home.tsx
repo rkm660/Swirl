@@ -1,6 +1,18 @@
-import { Link } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import { Navigate } from 'react-router-dom'
+import LoadingSpinner from '../components/LoadingSpinner'
 
 export default function Home() {
+  const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0()
+
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />
+  }
+
   return (
     <div className="relative isolate min-h-screen overflow-hidden bg-gray-900">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
@@ -12,12 +24,12 @@ export default function Home() {
             Your lead management platform for better business growth.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
-            <Link
-              to="/dashboard"
+            <button
+              onClick={() => loginWithRedirect()}
               className="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"
             >
               Get started
-            </Link>
+            </button>
           </div>
         </div>
       </div>

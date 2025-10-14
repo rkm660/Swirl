@@ -1,5 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
 import MainLayout from './layouts/MainLayout'
+import ProtectedRoute from './components/ProtectedRoute'
+import LoadingSpinner from './components/LoadingSpinner'
+import AuthCallback from './components/AuthCallback'
 
 // Pages
 import Home from './pages/Home'
@@ -12,21 +16,69 @@ import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      
-      <Route element={<MainLayout />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/goal" element={<Goal />} />
-        <Route path="/templates" element={<Templates />} />
-        <Route path="/prospects" element={<Prospects />} />
-        <Route path="/outbounds" element={<Outbounds />} />
-        <Route path="/settings" element={<Settings />} />
-      </Route>
+  const { isLoading } = useAuth0()
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
+
+  return (
+    <>
+      <AuthCallback />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/goal" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Goal />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/templates" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Templates />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/prospects" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Prospects />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/outbounds" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Outbounds />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/settings" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Settings />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   )
 }
 
