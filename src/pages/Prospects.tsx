@@ -176,13 +176,13 @@ export default function Prospects() {
                               </button>
                             )
                           })}
-                          <button
-                            onClick={() => handleQuickAction(prospect.id, 'X')}
-                            className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded text-xs font-medium transition-colors"
-                            title="Mark as not interested"
-                          >
-                            X
-                          </button>
+                              <button
+                                onClick={() => handleQuickAction(prospect.id, 'X')}
+                                className="bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded-full text-xs font-bold transition-colors border border-red-200"
+                                title="Mark as not interested"
+                              >
+                                ✕
+                              </button>
                         </div>
                       </td>
                     </tr>
