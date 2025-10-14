@@ -7,11 +7,21 @@ import {
   Bars3Icon,
   XMarkIcon,
   QuestionMarkCircleIcon,
+  TargetIcon,
+  DocumentTextIcon,
+  UserGroupIcon,
+  PaperAirplaneIcon,
+  Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
-import logo from '../assets/logo.svg'
+import logo from '../assets/logo.png'
 
 const navigation = [
   { name: 'Dashboard', to: '/dashboard', icon: HomeIcon },
+  { name: 'Goal', to: '/goal', icon: TargetIcon },
+  { name: 'Templates', to: '/templates', icon: DocumentTextIcon },
+  { name: 'Prospects', to: '/prospects', icon: UserGroupIcon },
+  { name: 'Outbounds', to: '/outbounds', icon: PaperAirplaneIcon },
+  { name: 'Settings', to: '/settings', icon: Cog6ToothIcon },
 ]
 
 function classNames(...classes: string[]) {
