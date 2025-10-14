@@ -28,9 +28,9 @@ export default function Goal() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Goal</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Current Goal</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Specify the type of leads you're seeking
+          Specify the type of leads you're seeking. You can always update this later!
         </p>
       </div>
 
