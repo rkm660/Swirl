@@ -14,7 +14,7 @@ interface OutboundProspect {
   location: string
   linkedinUrl: string
   template: string
-  status: 'not_contacted' | 'contacted'
+  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'not_interested' | 'meeting_scheduled' | 'converted'
   contactedDate?: string
 }
 
@@ -65,8 +65,13 @@ export default function Outbounds() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'not_contacted': return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-      case 'contacted': return 'bg-green-50 text-green-700 ring-green-600/20'
+      case 'not_contacted': return 'bg-gray-50 text-gray-700 ring-gray-600/20'
+      case 'contacted': return 'bg-blue-50 text-blue-700 ring-blue-600/20'
+      case 'responded': return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
+      case 'interested': return 'bg-green-50 text-green-700 ring-green-600/20'
+      case 'not_interested': return 'bg-red-50 text-red-700 ring-red-600/20'
+      case 'meeting_scheduled': return 'bg-purple-50 text-purple-700 ring-purple-600/20'
+      case 'converted': return 'bg-emerald-50 text-emerald-700 ring-emerald-600/20'
       default: return 'bg-gray-50 text-gray-600 ring-gray-500/10'
     }
   }
@@ -75,6 +80,11 @@ export default function Outbounds() {
     switch (status) {
       case 'not_contacted': return 'Not Contacted'
       case 'contacted': return 'Contacted'
+      case 'responded': return 'Responded'
+      case 'interested': return 'Interested'
+      case 'not_interested': return 'Not Interested'
+      case 'meeting_scheduled': return 'Meeting Scheduled'
+      case 'converted': return 'Converted'
       default: return status
     }
   }
@@ -240,6 +250,11 @@ export default function Outbounds() {
             <option value="">All Statuses</option>
             <option value="not_contacted">Not Contacted</option>
             <option value="contacted">Contacted</option>
+            <option value="responded">Responded</option>
+            <option value="interested">Interested</option>
+            <option value="not_interested">Not Interested</option>
+            <option value="meeting_scheduled">Meeting Scheduled</option>
+            <option value="converted">Converted</option>
           </select>
         </div>
       </div>
@@ -446,14 +461,20 @@ export default function Outbounds() {
                             <div className="absolute top-full left-0 mt-1 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                               {[
                                 { value: 'not_contacted', label: 'Not Contacted' },
-                                { value: 'contacted', label: 'Contacted' }
+                                { value: 'contacted', label: 'Contacted' },
+                                { value: 'responded', label: 'Responded' },
+                                { value: 'interested', label: 'Interested' },
+                                { value: 'not_interested', label: 'Not Interested' },
+                                { value: 'meeting_scheduled', label: 'Meeting Scheduled' },
+                                { value: 'converted', label: 'Converted' }
                               ].map((status) => (
                                 <button
                                   key={status.value}
                                   onClick={(e) => {
                                     e.stopPropagation()
                                     const today = new Date()
-                                    const contactedDate = status.value === 'contacted' 
+                                    const engagementStatuses = ['contacted', 'responded', 'interested', 'not_interested', 'meeting_scheduled', 'converted']
+                                    const contactedDate = engagementStatuses.includes(status.value) 
                                       ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
                                       : undefined
                                     setOutboundProspects(prev => prev.map(p => 
