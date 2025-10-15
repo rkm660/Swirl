@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { ArrowUturnLeftIcon, ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -41,8 +41,7 @@ export default function Outbounds() {
       location: 'Newark, NJ',
       linkedinUrl: 'https://linkedin.com/in/mike-chen',
       template: 'B',
-      status: 'contacted',
-      contactedDate: '2024-03-20'
+      status: 'not_contacted'
     },
     {
       id: '3',
@@ -114,21 +113,6 @@ export default function Outbounds() {
     window.open(prospect.linkedinUrl, '_blank')
   }
 
-  const toggleContactedStatus = (prospect: OutboundProspect) => {
-    const newStatus = prospect.status === 'contacted' ? 'not_contacted' : 'contacted'
-    let newDate: string | undefined = undefined
-    
-    if (newStatus === 'contacted') {
-      const today = new Date()
-      newDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-    }
-    
-    setOutboundProspects(prev => prev.map(p => 
-      p.id === prospect.id 
-        ? { ...p, status: newStatus, contactedDate: newDate }
-        : p
-    ))
-  }
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState('')
@@ -406,15 +390,6 @@ export default function Outbounds() {
                               </span>
                             )}
                           </span>
-                          {prospect.status === 'contacted' && (
-                            <button
-                              onClick={() => toggleContactedStatus(prospect)}
-                              className="inline-flex items-center justify-center rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                              title="Mark as not contacted"
-                            >
-                              <ArrowUturnLeftIcon className="h-4 w-4" />
-                            </button>
-                          )}
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
@@ -426,15 +401,13 @@ export default function Outbounds() {
                           >
                             <ClipboardDocumentIcon className="h-4 w-4" />
                           </button>
-                          {prospect.status !== 'contacted' && (
-                            <button
-                              onClick={() => handleConnect(prospect)}
-                              className="inline-flex items-center justify-center rounded-full p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
-                              title="Open LinkedIn profile"
-                            >
-                              <LinkIcon className="h-4 w-4" />
-                            </button>
-                          )}
+                          <button
+                            onClick={() => handleConnect(prospect)}
+                            className="inline-flex items-center justify-center rounded-full p-1.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            title="Open LinkedIn profile"
+                          >
+                            <LinkIcon className="h-4 w-4" />
+                          </button>
                         </div>
                       </td>
                     </tr>
