@@ -183,9 +183,9 @@ export default function Prospects() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Prospects</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Leads</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Manage your prospect database and outreach
+          Manage your lead database and outreach
         </p>
       </div>
 
