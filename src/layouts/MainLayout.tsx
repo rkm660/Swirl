@@ -12,6 +12,7 @@ import {
   DocumentTextIcon,
   UserGroupIcon,
   PaperAirplaneIcon,
+  TrashIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
 // import logo from '/logo.svg'
@@ -22,7 +23,7 @@ const navigation = [
   { name: 'Templates', to: '/templates', icon: DocumentTextIcon },
   { name: 'Prospects', to: '/prospects', icon: UserGroupIcon },
   { name: 'Outbounds', to: '/outbounds', icon: PaperAirplaneIcon },
-  { name: 'Discarded', to: '/discarded', icon: UserGroupIcon },
+  { name: 'Discarded', to: '/discarded', icon: TrashIcon },
   { name: 'Settings', to: '/settings', icon: Cog6ToothIcon },
 ]
 

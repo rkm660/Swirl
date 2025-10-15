@@ -16,14 +16,14 @@ export default function Home() {
   return (
     <div className="relative isolate min-h-screen overflow-hidden bg-gray-900 flow-root">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
-        <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-          <div className="mt-10 flex justify-start mb-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mt-10 flex justify-center mb-8">
             <img src="/logo.svg" alt="EverLeads" className="h-24 w-auto sm:h-32" />
           </div>
-          <p className="mt-6 text-lg leading-8 text-gray-300 text-left">
+          <p className="mt-6 text-lg leading-8 text-gray-300">
             Your lead management platform for better business growth.
           </p>
-          <div className="mt-10 flex items-center gap-x-6">
+          <div className="mt-10 flex items-center justify-center gap-x-6">
             <button
               onClick={() => loginWithRedirect()}
               className="rounded-md bg-primary-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primary-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-400"

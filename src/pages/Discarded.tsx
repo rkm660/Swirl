@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { MagnifyingGlassIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
@@ -18,7 +18,7 @@ interface DiscardedProspect {
 
 export default function Discarded() {
   // Mock data - in real app this would come from API
-  const [discardedProspects] = useState<DiscardedProspect[]>([
+  const [discardedProspects, setDiscardedProspects] = useState<DiscardedProspect[]>([
     {
       id: '1',
       name: 'John Smith',
@@ -46,6 +46,13 @@ export default function Discarded() {
       return (count / 1000).toFixed(1) + 'K'
     }
     return count.toString()
+  }
+
+  const handleUndo = (prospect: DiscardedProspect) => {
+    // Remove prospect from discarded list
+    setDiscardedProspects(prev => prev.filter(p => p.id !== prospect.id))
+    // TODO: In real app, this would move the prospect back to the Prospects page
+    console.log('Moving prospect back to prospects:', prospect.name)
   }
 
   // Search and filter state
@@ -247,6 +254,9 @@ export default function Discarded() {
                         )}
                       </div>
                     </th>
+                    <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
+                      Undiscard
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
@@ -279,6 +289,15 @@ export default function Discarded() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
                         {new Date(prospect.discardedDate).toLocaleDateString()}
+                      </td>
+                      <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
+                        <button
+                          onClick={() => handleUndo(prospect)}
+                          className="inline-flex items-center justify-center rounded-full p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                          title="Move back to Prospects"
+                        >
+                          <ArrowUturnLeftIcon className="h-4 w-4" />
+                        </button>
                       </td>
                     </tr>
                   ))}

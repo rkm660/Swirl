@@ -40,7 +40,7 @@ export default function Templates() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Templates</h1>
         <p className="mt-1 text-sm text-gray-500">
-          LinkedIn connection request templates with personal notes
+          LinkedIn connection request personal note templates
         </p>
       </div>
 
