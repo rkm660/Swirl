@@ -14,13 +14,13 @@ export default function Home() {
   }
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-gray-900">
+    <div className="relative isolate min-h-screen overflow-hidden bg-gray-900 flow-root">
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-          <h1 className="mt-10 max-w-lg text-4xl font-bold tracking-tight text-white sm:text-6xl">
-            EverLeads v2
-          </h1>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
+          <div className="mt-10 flex justify-start mb-8">
+            <img src="/logo.svg" alt="EverLeads" className="h-24 w-auto sm:h-32" />
+          </div>
+          <p className="mt-6 text-lg leading-8 text-gray-300 text-left">
             Your lead management platform for better business growth.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
