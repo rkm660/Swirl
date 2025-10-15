@@ -17,6 +17,17 @@ export default function Templates() {
     { id: 'E', name: 'Template E', content: '', description: '' },
   ])
 
+  const getTemplatePlaceholders = (templateId: string) => {
+    const placeholders = {
+      A: 'e.g. casual outreach for tech professionals',
+      B: 'e.g. formal approach for enterprise sales',
+      C: 'e.g. referral-based for mutual connections',
+      D: 'e.g. industry-specific for healthcare',
+      E: 'e.g. event-based for conference attendees'
+    }
+    return placeholders[templateId as keyof typeof placeholders] || placeholders.A
+  }
+
   const updateTemplate = (id: string, field: 'content' | 'description', value: string) => {
     setTemplates(prev => prev.map(t => t.id === id ? { ...t, [field]: value } : t))
   }
@@ -67,13 +78,13 @@ export default function Templates() {
               {/* Name field */}
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
+                  Descriptor
                 </label>
                 <input
                   type="text"
                   value={template.description}
                   onChange={(e) => updateTemplate(template.id, 'description', e.target.value)}
-                  placeholder="e.g. informal for marketing execs"
+                  placeholder={getTemplatePlaceholders(template.id)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-primary-500 focus:border-primary-500"
                   maxLength={100}
                 />
@@ -82,7 +93,7 @@ export default function Templates() {
               {/* Content field */}
               <div className="relative">
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Template Content
+                  Personal Note
                 </label>
                 <textarea
                   value={template.content}
