@@ -185,7 +185,7 @@ export default function Prospects() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Leads</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Manage your lead database and outreach
+          Bucket your leads into categories or discard
         </p>
       </div>
 

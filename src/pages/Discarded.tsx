@@ -143,7 +143,7 @@ export default function Discarded() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Discarded</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Prospects that were marked as not interested
+          Leads that were marked as not interested
         </p>
       </div>
 

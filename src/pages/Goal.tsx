@@ -30,7 +30,7 @@ export default function Goal() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Current Goal</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Tell us what kind of people you want to reach. Be specific about roles, industries, and locations for better results.
+          Tell us about who you are looking to reach
         </p>
       </div>
 
