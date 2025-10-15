@@ -1,9 +1,6 @@
 import { useState, useMemo } from 'react'
 import { MagnifyingGlassIcon, ArrowUturnLeftIcon } from '@heroicons/react/24/outline'
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
 
 interface DiscardedProspect {
   id: string

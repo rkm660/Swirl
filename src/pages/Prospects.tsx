@@ -1,9 +1,5 @@
 import { useState, useMemo } from 'react'
-import { MagnifyingGlassIcon, FunnelIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline'
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 interface Prospect {
   id: string
