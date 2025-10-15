@@ -76,10 +76,9 @@ export default function Templates() {
             <div className="px-4 py-5 sm:p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-medium text-gray-900 flex items-center">
-                  <span className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium mr-3 ${getTemplateColor(template.id)}`}>
+                  <span className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium ${getTemplateColor(template.id)}`}>
                     {template.id}
                   </span>
-                  {template.name}
                 </h3>
                 <div className="flex items-center space-x-2">
                   <span className={`text-sm font-medium ${
