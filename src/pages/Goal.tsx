@@ -30,7 +30,7 @@ export default function Goal() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">Current Goal</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Specify the type of leads you're seeking. You can always update this later!
+          Tell us what kind of prospects you want to reach. Be specific about roles, industries, and locations for better results.
         </p>
       </div>
 
