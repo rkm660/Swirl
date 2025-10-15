@@ -35,6 +35,17 @@ export default function Templates() {
   const getCharacterCount = (content: string) => content.length
   const isOverLimit = (content: string) => content.length > 300
 
+  const getTemplateColor = (templateId: string) => {
+    switch (templateId) {
+      case 'A': return 'bg-blue-100 text-blue-700'
+      case 'B': return 'bg-green-100 text-green-700'
+      case 'C': return 'bg-yellow-100 text-yellow-700'
+      case 'D': return 'bg-purple-100 text-purple-700'
+      case 'E': return 'bg-indigo-100 text-indigo-700'
+      default: return 'bg-gray-100 text-gray-700'
+    }
+  }
+
   return (
     <div className="space-y-6">
       <div>
@@ -64,7 +75,12 @@ export default function Templates() {
           <div key={template.id} className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">{template.name}</h3>
+                <h3 className="text-lg font-medium text-gray-900 flex items-center">
+                  <span className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium mr-3 ${getTemplateColor(template.id)}`}>
+                    {template.id}
+                  </span>
+                  {template.name}
+                </h3>
                 <div className="flex items-center space-x-2">
                   <span className={`text-sm font-medium ${
                     isOverLimit(template.content) ? 'text-red-600' : 'text-gray-500'
