@@ -1,6 +1,7 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { toast } from './Toast'
 
 type SupportTicketModalProps = {
   isOpen: boolean
@@ -20,8 +21,8 @@ export default function SupportTicketModal({ isOpen, onClose }: SupportTicketMod
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      // Show success message
-      alert('Support ticket submitted successfully!')
+      // Show success toast
+      toast.success('Support ticket submitted successfully!', { duration: 3000 })
       
       // Reset form and close modal
       setSubject('')
@@ -29,7 +30,7 @@ export default function SupportTicketModal({ isOpen, onClose }: SupportTicketMod
       onClose()
     } catch (error) {
       console.error('Failed to submit ticket:', error)
-      alert('Failed to submit ticket. Please try again.')
+      toast.error('Failed to submit ticket. Please try again.', { duration: 3000 })
     } finally {
       setIsSubmitting(false)
     }

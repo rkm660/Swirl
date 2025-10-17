@@ -16,6 +16,7 @@ import {
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
 import SupportTicketModal from '../components/SupportTicketModal'
+import ToastContainer from '../components/ToastContainer'
 // import logo from '/logo.svg'
 
 const navigation = [
@@ -199,6 +200,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
         isOpen={isSupportModalOpen}
         onClose={() => setIsSupportModalOpen(false)}
       />
+
+      {/* Toast container */}
+      <ToastContainer />
     </div>
   )
 }
