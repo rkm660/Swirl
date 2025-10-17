@@ -59,10 +59,10 @@ export default function Dashboard() {
       { period: 'Sun', leads: 19, outreach: 38, responses: 9 }
     ],
     weekly: [
-      { period: 'Week 1', leads: 287, outreach: 1234, responses: 156 },
-      { period: 'Week 2', leads: 312, outreach: 1456, responses: 189 },
-      { period: 'Week 3', leads: 298, outreach: 1378, responses: 167 },
-      { period: 'Week 4', leads: 350, outreach: 1567, responses: 203 }
+      { period: 'Dec 2-8', leads: 287, outreach: 1234, responses: 156 },
+      { period: 'Dec 9-15', leads: 312, outreach: 1456, responses: 189 },
+      { period: 'Dec 16-22', leads: 298, outreach: 1378, responses: 167 },
+      { period: 'Dec 23-29', leads: 350, outreach: 1567, responses: 203 }
     ],
     monthly: [
       { period: 'Jan', leads: 1156, outreach: 4789, responses: 623 },
