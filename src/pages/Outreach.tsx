@@ -14,7 +14,7 @@ interface OutboundProspect {
   contactedDate?: string
 }
 
-export default function Outbounds() {
+export default function Outreach() {
   // Mock data - in real app this would come from API
   const [outboundProspects, setOutboundProspects] = useState<OutboundProspect[]>([
     {
@@ -205,7 +205,7 @@ export default function Outbounds() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-gray-900">Outbounds</h1>
+        <h1 className="text-2xl font-semibold text-gray-900">Outreach</h1>
         <p className="mt-1 text-sm text-gray-500">
           Easily connect with promising candidates
         </p>
@@ -219,7 +219,7 @@ export default function Outbounds() {
           </div>
           <input
             type="text"
-            placeholder="Search outbounds..."
+            placeholder="Search outreach..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full rounded-md border border-gray-300 pl-9 pr-3 py-1.5 text-xs text-gray-900 shadow-sm focus:border-primary-500 focus:ring-primary-500"

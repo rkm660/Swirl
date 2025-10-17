@@ -54,10 +54,10 @@ export default function Discarded() {
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState('')
-  const [sortField, setSortField] = useState<'name' | 'title' | 'company' | 'followers' | 'location' | 'date' | null>(null)
+  const [sortField, setSortField] = useState<'name' | 'title' | 'company' | 'followers' | 'location' | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
 
-  const handleSort = (field: 'name' | 'title' | 'company' | 'followers' | 'location' | 'date') => {
+  const handleSort = (field: 'name' | 'title' | 'company' | 'followers' | 'location') => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc')
     } else {
@@ -94,10 +94,6 @@ export default function Discarded() {
           aValue = a.location.toLowerCase()
           bValue = b.location.toLowerCase()
           break
-        case 'date':
-          aValue = new Date(a.discardedDate).getTime()
-          bValue = new Date(b.discardedDate).getTime()
-          break
         default:
           return 0
       }
@@ -128,8 +124,7 @@ export default function Discarded() {
              prospect.title.toLowerCase().includes(searchLower) ||
              prospect.company.toLowerCase().includes(searchLower) ||
              prospect.location.toLowerCase().includes(searchLower) ||
-             prospect.followerCount.toString().includes(searchLower) ||
-             new Date(prospect.discardedDate).toLocaleDateString().toLowerCase().includes(searchLower)
+             prospect.followerCount.toString().includes(searchLower)
     })
 
     return getSortedProspects(filtered)
@@ -237,22 +232,8 @@ export default function Discarded() {
                         )}
                       </div>
                     </th>
-                    <th 
-                      scope="col" 
-                      className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900 cursor-pointer hover:bg-gray-100"
-                      onClick={() => handleSort('date')}
-                    >
-                      <div className="flex items-center">
-                        Discarded Date
-                        {sortField === 'date' && (
-                          <span className="ml-1">
-                            {sortDirection === 'asc' ? '↑' : '↓'}
-                          </span>
-                        )}
-                      </div>
-                    </th>
                     <th scope="col" className="px-3 py-3.5 text-left text-xs font-semibold text-gray-900">
-                      Undiscard
+                      Restore
                     </th>
                   </tr>
                 </thead>
@@ -283,9 +264,6 @@ export default function Discarded() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
                         {prospect.location}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-xs text-gray-500">
-                        {new Date(prospect.discardedDate).toLocaleDateString()}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
                         <button
