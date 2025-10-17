@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { 
   UserGroupIcon, 
   PaperAirplaneIcon, 
@@ -6,18 +6,11 @@ import {
   ArrowTrendingUpIcon,
   ArrowUpIcon,
   ArrowDownIcon,
-  ClockIcon,
   CalendarIcon
 } from '@heroicons/react/24/outline'
 
 export default function Dashboard() {
-  const [currentTime, setCurrentTime] = useState(new Date())
   const [timeRange, setTimeRange] = useState<'daily' | 'weekly' | 'monthly'>('weekly')
-
-  useEffect(() => {
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000)
-    return () => clearInterval(timer)
-  }, [])
 
   const stats = [
     {
@@ -84,19 +77,11 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Performance overview for your outreach campaigns
-          </p>
-        </div>
-        <div className="mt-4 sm:mt-0 flex items-center space-x-4">
-          <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <ClockIcon className="h-4 w-4" />
-            <span>{currentTime.toLocaleTimeString()}</span>
-          </div>
-        </div>
+      <div>
+        <h1 className="text-2xl font-semibold text-gray-900">Dashboard</h1>
+        <p className="mt-1 text-sm text-gray-500">
+          Performance overview for your outreach campaigns
+        </p>
       </div>
 
       {/* Time Range Selector */}

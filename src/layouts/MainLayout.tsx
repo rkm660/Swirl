@@ -15,6 +15,7 @@ import {
   TrashIcon,
   Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
+import SupportTicketModal from '../components/SupportTicketModal'
 // import logo from '/logo.svg'
 
 const navigation = [
@@ -39,6 +40,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   const { user, logout } = useAuth0()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobileView, setIsMobileView] = useState(false)
+  const [isSupportModalOpen, setIsSupportModalOpen] = useState(false)
 
   // Handle window resize
   useEffect(() => {
@@ -162,7 +164,10 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
         {/* Help button */}
         <div className="border-t border-gray-200 px-2 py-2">
-          <button className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900">
+          <button 
+            onClick={() => setIsSupportModalOpen(true)}
+            className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          >
             <QuestionMarkCircleIcon className="mr-2 h-4 w-4" aria-hidden="true" />
             Help & Support
           </button>
@@ -188,6 +193,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
+
+      {/* Support ticket modal */}
+      <SupportTicketModal
+        isOpen={isSupportModalOpen}
+        onClose={() => setIsSupportModalOpen(false)}
+      />
     </div>
   )
 }
