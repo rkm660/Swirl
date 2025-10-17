@@ -35,7 +35,7 @@ export default function Home() {
           <div className="mt-10 flex justify-center mb-8">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full blur-lg opacity-30"></div>
-              <img src="/logo.svg" alt="EverLeads" className="relative h-24 w-auto sm:h-32" />
+              <img src="/logo.svg" alt="EverLeads" className="relative h-32 w-auto sm:h-40" />
             </div>
           </div>
 

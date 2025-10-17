@@ -5,12 +5,10 @@ import {
   BuildingOfficeIcon, 
   EnvelopeIcon,
   LinkIcon,
-  CheckIcon,
-  XMarkIcon
+  CheckIcon
 } from '@heroicons/react/24/outline'
 
 export default function Settings() {
-  const [activeTab, setActiveTab] = useState<'billing' | 'profile'>('billing')
   const [isUpgrading, setIsUpgrading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
 
@@ -69,41 +67,9 @@ export default function Settings() {
         </p>
       </div>
 
-      {/* Tab Navigation */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
-          <button
-            onClick={() => setActiveTab('billing')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'billing'
-                ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <CreditCardIcon className="h-4 w-4" />
-              <span>Billing & Subscription</span>
-            </div>
-          </button>
-          <button
-            onClick={() => setActiveTab('profile')}
-            className={`py-2 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'profile'
-                ? 'border-primary-500 text-primary-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            <div className="flex items-center space-x-2">
-              <UserIcon className="h-4 w-4" />
-              <span>Personal Information</span>
-            </div>
-          </button>
-        </nav>
-      </div>
 
-      {/* Billing & Subscription Tab */}
-      {activeTab === 'billing' && (
-        <div className="space-y-6">
+      {/* Billing & Subscription Section */}
+      <div className="space-y-6">
           {/* Current Plan */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
@@ -236,10 +202,8 @@ export default function Settings() {
             </div>
           )}
         </div>
-      )}
 
-      {/* Personal Information Tab */}
-      {activeTab === 'profile' && (
+      {/* Personal Information Section */}
         <div className="bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900 mb-6">
@@ -342,7 +306,6 @@ export default function Settings() {
             </form>
           </div>
         </div>
-      )}
     </div>
   )
 }
