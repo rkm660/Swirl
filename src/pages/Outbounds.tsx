@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
 
 function classNames(...classes: string[]) {
@@ -52,7 +52,32 @@ export default function Outbounds() {
       location: 'San Francisco, CA',
       linkedinUrl: 'https://linkedin.com/in/emily-rodriguez',
       template: 'C',
-      status: 'not_contacted'
+      status: 'contacted',
+      contactedDate: '2024-01-15'
+    },
+    {
+      id: '4',
+      name: 'David Kim',
+      title: 'VP of Sales',
+      company: 'Enterprise Corp',
+      followerCount: 3200,
+      location: 'Chicago, IL',
+      linkedinUrl: 'https://linkedin.com/in/david-kim',
+      template: 'A',
+      status: 'responded',
+      contactedDate: '2024-01-10'
+    },
+    {
+      id: '5',
+      name: 'Lisa Wang',
+      title: 'CTO',
+      company: 'Tech Innovations',
+      followerCount: 4500,
+      location: 'Seattle, WA',
+      linkedinUrl: 'https://linkedin.com/in/lisa-wang',
+      template: 'B',
+      status: 'interested',
+      contactedDate: '2024-01-08'
     }
   ])
 
@@ -129,16 +154,6 @@ export default function Outbounds() {
   const [statusFilter, setStatusFilter] = useState('')
   const [sortField, setSortField] = useState<'name' | 'title' | 'company' | 'followers' | 'location' | 'template' | 'status' | null>(null)
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
-  const [openDropdowns, setOpenDropdowns] = useState<Record<string, boolean>>({})
-
-  // Close dropdowns when clicking outside
-  useEffect(() => {
-    const handleClickOutside = () => {
-      setOpenDropdowns({})
-    }
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [])
 
   const handleSort = (field: 'name' | 'title' | 'company' | 'followers' | 'location' | 'template' | 'status') => {
     if (sortField === field) {
@@ -399,101 +414,47 @@ export default function Outbounds() {
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
                         <div className="relative">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setOpenDropdowns(prev => ({ ...prev, [`template-${prospect.id}`]: !prev[`template-${prospect.id}`] }))
+                          <select
+                            value={prospect.template}
+                            onChange={(e) => {
+                              setOutboundProspects(prev => prev.map(p => 
+                                p.id === prospect.id ? { ...p, template: e.target.value } : p
+                              ))
                             }}
-                            className="flex items-center space-x-1 px-2 py-1 rounded text-xs font-medium transition-colors hover:bg-gray-100"
+                            className="px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                           >
-                            <span className={`inline-flex items-center rounded-md px-2 py-1 text-sm font-medium ${getTemplateColor(prospect.template)}`}>
-                              {prospect.template}
-                            </span>
-                            <ChevronDownIcon className="h-3 w-3" />
-                          </button>
-                          {openDropdowns[`template-${prospect.id}`] && (
-                            <div className="absolute top-full left-0 mt-1 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                              {['A', 'B', 'C', 'D', 'E'].map((templateId) => (
-                                <button
-                                  key={templateId}
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    setOutboundProspects(prev => prev.map(p => 
-                                      p.id === prospect.id ? { ...p, template: templateId } : p
-                                    ))
-                                    setOpenDropdowns(prev => ({ ...prev, [`template-${prospect.id}`]: false }))
-                                  }}
-                                  className="w-full text-left px-3 py-2 text-xs hover:bg-gray-50 flex items-center space-x-2"
-                                >
-                                  <span className={`inline-flex items-center rounded-md px-1 py-0.5 text-xs font-medium ${getTemplateColor(templateId)}`}>
-                                    {templateId}
-                                  </span>
-                                  <span className="text-gray-600">Template {templateId}</span>
-                                </button>
-                              ))}
-                            </div>
-                          )}
+                            {['A', 'B', 'C', 'D', 'E'].map((templateId) => (
+                              <option key={templateId} value={templateId}>
+                                Template {templateId}
+                              </option>
+                            ))}
+                          </select>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
                         <div className="relative">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setOpenDropdowns(prev => ({ ...prev, [`status-${prospect.id}`]: !prev[`status-${prospect.id}`] }))
+                          <select
+                            value={prospect.status}
+                            onChange={(e) => {
+                              const today = new Date()
+                              const engagementStatuses = ['contacted', 'responded', 'interested', 'not_interested', 'meeting_scheduled', 'converted']
+                              const contactedDate = engagementStatuses.includes(e.target.value) 
+                                ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
+                                : undefined
+                              setOutboundProspects(prev => prev.map(p => 
+                                p.id === prospect.id ? { ...p, status: e.target.value as any, contactedDate } : p
+                              ))
                             }}
-                            className="flex items-center space-x-1 px-2 py-1 rounded text-xs font-medium transition-colors hover:bg-gray-100"
+                            className="px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
                           >
-                            <span className={classNames(
-                              getStatusColor(prospect.status),
-                              'inline-flex flex-col items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset'
-                            )}>
-                              <span>{getStatusText(prospect.status)}</span>
-                              {prospect.contactedDate && (
-                                <span className="text-xs opacity-75">
-                                  {new Date(prospect.contactedDate + 'T00:00:00').toLocaleDateString()}
-                                </span>
-                              )}
-                            </span>
-                            <ChevronDownIcon className="h-3 w-3" />
-                          </button>
-                          {openDropdowns[`status-${prospect.id}`] && (
-                            <div className="absolute top-full left-0 mt-1 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                              {[
-                                { value: 'not_contacted', label: 'Not Contacted' },
-                                { value: 'contacted', label: 'Contacted' },
-                                { value: 'responded', label: 'Responded' },
-                                { value: 'interested', label: 'Interested' },
-                                { value: 'not_interested', label: 'Not Interested' },
-                                { value: 'meeting_scheduled', label: 'Meeting Scheduled' },
-                                { value: 'converted', label: 'Converted' }
-                              ].map((status) => (
-                                <button
-                                  key={status.value}
-                                  onClick={(e) => {
-                                    e.stopPropagation()
-                                    const today = new Date()
-                                    const engagementStatuses = ['contacted', 'responded', 'interested', 'not_interested', 'meeting_scheduled', 'converted']
-                                    const contactedDate = engagementStatuses.includes(status.value) 
-                                      ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-                                      : undefined
-                                    setOutboundProspects(prev => prev.map(p => 
-                                      p.id === prospect.id ? { ...p, status: status.value as any, contactedDate } : p
-                                    ))
-                                    setOpenDropdowns(prev => ({ ...prev, [`status-${prospect.id}`]: false }))
-                                  }}
-                                  className="w-full text-left px-3 py-2 text-xs hover:bg-gray-50 flex items-center space-x-2"
-                                >
-                                  <span className={classNames(
-                                    getStatusColor(status.value),
-                                    'inline-flex items-center rounded-md px-1 py-0.5 text-xs font-medium ring-1 ring-inset'
-                                  )}>
-                                    {status.label}
-                                  </span>
-                                </button>
-                              ))}
-                            </div>
-                          )}
+                            <option value="not_contacted">Not Contacted</option>
+                            <option value="contacted">Contacted</option>
+                            <option value="responded">Responded</option>
+                            <option value="interested">Interested</option>
+                            <option value="not_interested">Not Interested</option>
+                            <option value="meeting_scheduled">Meeting Scheduled</option>
+                            <option value="converted">Converted</option>
+                          </select>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs text-left">
