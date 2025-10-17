@@ -22,7 +22,7 @@ export default function SupportTicketModal({ isOpen, onClose }: SupportTicketMod
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       // Show success toast
-      toast.success('Support ticket submitted successfully!', { duration: 3000 })
+      toast.success('Message submitted successfully!', { duration: 3000 })
       
       // Reset form and close modal
       setSubject('')
@@ -77,11 +77,11 @@ export default function SupportTicketModal({ isOpen, onClose }: SupportTicketMod
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 w-full text-center sm:mt-0 sm:text-left">
                     <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                      Submit a Support Ticket
+                      Help & Support
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-xs text-gray-500">
-                        Fill out the form below and our support team will get back to you as soon as possible.
+                        Need help or have a feature request? We'd love to hear from you.
                       </p>
                     </div>
                   </div>
@@ -124,7 +124,7 @@ export default function SupportTicketModal({ isOpen, onClose }: SupportTicketMod
                       disabled={isSubmitting}
                       className="inline-flex w-full justify-center rounded-md bg-primary-600 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 disabled:opacity-50"
                     >
-                      {isSubmitting ? 'Submitting...' : 'Submit Ticket'}
+                      {isSubmitting ? 'Submitting...' : 'Send Message'}
                     </button>
                   </div>
                 </form>
