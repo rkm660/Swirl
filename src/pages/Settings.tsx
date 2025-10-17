@@ -265,10 +265,6 @@ export default function Settings() {
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
                       <span className="text-sm text-gray-600">Priority support</span>
                     </li>
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Advanced analytics</span>
-                    </li>
                   </ul>
                   
                   {subscription.plan === 'free' && (
