@@ -11,6 +11,7 @@ import {
 export default function Settings() {
   const [isUpgrading, setIsUpgrading] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [isCancelling, setIsCancelling] = useState(false)
 
   // Mock user data
   const [userInfo, setUserInfo] = useState({
@@ -55,6 +56,23 @@ export default function Settings() {
 
   const handleInputChange = (field: string, value: string) => {
     setUserInfo(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleCancelSubscription = async () => {
+    if (!confirm('Are you sure you want to cancel your subscription? You will lose access to Pro features at the end of your billing period.')) {
+      return
+    }
+    
+    setIsCancelling(true)
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000))
+      setSubscription(prev => ({ ...prev, plan: 'free', leadsLimit: 100 }))
+    } catch (error) {
+      console.error('Cancellation failed:', error)
+    } finally {
+      setIsCancelling(false)
+    }
   }
 
   return (
@@ -206,11 +224,7 @@ export default function Settings() {
                   <ul className="mt-6 space-y-3">
                     <li className="flex items-center">
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">100 free leads</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Basic templates</span>
+                      <span className="text-sm text-gray-600">100 targeted leads</span>
                     </li>
                     <li className="flex items-center">
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
@@ -259,7 +273,7 @@ export default function Settings() {
                     </li>
                     <li className="flex items-center">
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">All templates</span>
+                      <span className="text-sm text-gray-600">Custom templates</span>
                     </li>
                     <li className="flex items-center">
                       <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
@@ -267,13 +281,21 @@ export default function Settings() {
                     </li>
                   </ul>
                   
-                  {subscription.plan === 'free' && (
+                  {subscription.plan === 'free' ? (
                     <button
                       onClick={handleUpgrade}
                       disabled={isUpgrading}
                       className="w-full mt-6 bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
                     >
                       {isUpgrading ? 'Upgrading...' : 'Upgrade to Pro'}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={handleCancelSubscription}
+                      disabled={isCancelling}
+                      className="w-full mt-6 bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                    >
+                      {isCancelling ? 'Cancelling...' : 'Cancel Subscription'}
                     </button>
                   )}
                 </div>
