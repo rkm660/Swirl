@@ -10,7 +10,7 @@ interface OutboundProspect {
   location: string
   linkedinUrl: string
   template: string
-  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'converted'
+  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'engaged'
   contactedDate?: string
 }
 
@@ -236,7 +236,7 @@ export default function Outbounds() {
             <option value="contacted">Contacted</option>
             <option value="responded">Responded</option>
             <option value="interested">Interested</option>
-            <option value="converted">Converted</option>
+            <option value="engaged">Engaged</option>
           </select>
         </div>
       </div>
@@ -407,7 +407,7 @@ export default function Outbounds() {
                             value={prospect.status}
                             onChange={(e) => {
                               const today = new Date()
-                              const engagementStatuses = ['contacted', 'responded', 'interested', 'converted']
+                              const engagementStatuses = ['contacted', 'responded', 'interested', 'engaged']
                               const contactedDate = engagementStatuses.includes(e.target.value) 
                                 ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
                                 : undefined
@@ -421,7 +421,7 @@ export default function Outbounds() {
                             <option value="contacted">Contacted</option>
                             <option value="responded">Responded</option>
                             <option value="interested">Interested</option>
-                            <option value="converted">Converted</option>
+                            <option value="engaged">Engaged</option>
                           </select>
                         </div>
                       </td>
