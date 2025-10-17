@@ -14,7 +14,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0" style={{
@@ -24,17 +24,17 @@ export default function Home() {
       </div>
       
       {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-blue-200 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-16 h-16 bg-purple-200 rounded-full opacity-20 animate-pulse delay-1000"></div>
-      <div className="absolute bottom-40 left-20 w-24 h-24 bg-indigo-200 rounded-full opacity-20 animate-pulse delay-2000"></div>
-      <div className="absolute bottom-20 right-10 w-12 h-12 bg-pink-200 rounded-full opacity-20 animate-pulse delay-500"></div>
+      <div className="absolute top-20 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-pulse"></div>
+      <div className="absolute top-40 right-20 w-16 h-16 bg-primary-300 rounded-full opacity-20 animate-pulse delay-1000"></div>
+      <div className="absolute bottom-40 left-20 w-24 h-24 bg-primary-200 rounded-full opacity-20 animate-pulse delay-2000"></div>
+      <div className="absolute bottom-20 right-10 w-12 h-12 bg-primary-300 rounded-full opacity-20 animate-pulse delay-500"></div>
 
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
         <div className="mx-auto max-w-2xl text-center">
           {/* Logo */}
           <div className="mt-10 flex justify-center mb-8">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-lg opacity-30"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full blur-lg opacity-30"></div>
               <img src="/logo.svg" alt="EverLeads" className="relative h-24 w-auto sm:h-32" />
             </div>
           </div>
