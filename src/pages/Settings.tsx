@@ -68,6 +68,110 @@ export default function Settings() {
       </div>
 
 
+      {/* Personal Information Section */}
+        <div className="bg-white shadow rounded-lg">
+          <div className="px-4 py-5 sm:p-6">
+            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-6">
+              Personal Information
+            </h3>
+            
+            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleSaveProfile(); }}>
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                {/* Name */}
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    Full Name *
+                  </label>
+                  <div className="mt-1 relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <UserIcon className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      id="name"
+                      value={userInfo.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* Company */}
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                    Company Name
+                  </label>
+                  <div className="mt-1 relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <BuildingOfficeIcon className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input
+                      type="text"
+                      id="company"
+                      value={userInfo.company}
+                      onChange={(e) => handleInputChange('company', e.target.value)}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      placeholder="Optional"
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    Email Address *
+                  </label>
+                  <div className="mt-1 relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <EnvelopeIcon className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input
+                      type="email"
+                      id="email"
+                      value={userInfo.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      required
+                    />
+                  </div>
+                </div>
+
+                {/* LinkedIn */}
+                <div>
+                  <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700">
+                    LinkedIn Profile
+                  </label>
+                  <div className="mt-1 relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <LinkIcon className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input
+                      type="url"
+                      id="linkedin"
+                      value={userInfo.linkedin}
+                      onChange={(e) => handleInputChange('linkedin', e.target.value)}
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                      placeholder="https://linkedin.com/in/yourprofile"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Save Button */}
+              <div className="flex justify-end">
+                <button
+                  type="submit"
+                  disabled={isSaving}
+                  className="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
+                >
+                  {isSaving ? 'Saving...' : 'Save Changes'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
       {/* Billing & Subscription Section */}
       <div className="space-y-6">
           {/* Current Plan */}
@@ -201,110 +305,6 @@ export default function Settings() {
               </div>
             </div>
           )}
-        </div>
-
-      {/* Personal Information Section */}
-        <div className="bg-white shadow rounded-lg">
-          <div className="px-4 py-5 sm:p-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900 mb-6">
-              Personal Information
-            </h3>
-            
-            <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleSaveProfile(); }}>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {/* Name */}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                    Full Name *
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <UserIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="text"
-                      id="name"
-                      value={userInfo.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* Company */}
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">
-                    Company Name
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <BuildingOfficeIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="text"
-                      id="company"
-                      value={userInfo.company}
-                      onChange={(e) => handleInputChange('company', e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                      placeholder="Optional"
-                    />
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                    Email Address *
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <EnvelopeIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="email"
-                      id="email"
-                      value={userInfo.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                      required
-                    />
-                  </div>
-                </div>
-
-                {/* LinkedIn */}
-                <div>
-                  <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700">
-                    LinkedIn Profile
-                  </label>
-                  <div className="mt-1 relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <LinkIcon className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input
-                      type="url"
-                      id="linkedin"
-                      value={userInfo.linkedin}
-                      onChange={(e) => handleInputChange('linkedin', e.target.value)}
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md text-sm text-gray-900 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
-                      placeholder="https://linkedin.com/in/yourprofile"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Save Button */}
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  disabled={isSaving}
-                  className="bg-primary-600 text-white px-6 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
-                >
-                  {isSaving ? 'Saving...' : 'Save Changes'}
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
     </div>
   )
