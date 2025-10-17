@@ -1,9 +1,5 @@
 import { useState, useMemo } from 'react'
-import { ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon, ChevronDownIcon } from '@heroicons/react/24/outline'
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
+import { ClipboardDocumentIcon, LinkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 interface OutboundProspect {
   id: string
@@ -14,7 +10,7 @@ interface OutboundProspect {
   location: string
   linkedinUrl: string
   template: string
-  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'not_interested' | 'meeting_scheduled' | 'converted'
+  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'converted'
   contactedDate?: string
 }
 
@@ -88,32 +84,6 @@ export default function Outbounds() {
     return count.toString()
   }
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'not_contacted': return 'bg-gray-50 text-gray-700 ring-gray-600/20'
-      case 'contacted': return 'bg-blue-50 text-blue-700 ring-blue-600/20'
-      case 'responded': return 'bg-yellow-50 text-yellow-700 ring-yellow-600/20'
-      case 'interested': return 'bg-green-50 text-green-700 ring-green-600/20'
-      case 'not_interested': return 'bg-red-50 text-red-700 ring-red-600/20'
-      case 'meeting_scheduled': return 'bg-purple-50 text-purple-700 ring-purple-600/20'
-      case 'converted': return 'bg-emerald-50 text-emerald-700 ring-emerald-600/20'
-      default: return 'bg-gray-50 text-gray-600 ring-gray-500/10'
-    }
-  }
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'not_contacted': return 'Not Contacted'
-      case 'contacted': return 'Contacted'
-      case 'responded': return 'Responded'
-      case 'interested': return 'Interested'
-      case 'not_interested': return 'Not Interested'
-      case 'meeting_scheduled': return 'Meeting Scheduled'
-      case 'converted': return 'Converted'
-      default: return status
-    }
-  }
-
   const getTemplateColor = (templateId: string) => {
     switch (templateId) {
       case 'A': return 'bg-blue-100 text-blue-700'
@@ -147,7 +117,6 @@ export default function Outbounds() {
     // Open LinkedIn profile in new tab
     window.open(prospect.linkedinUrl, '_blank')
   }
-
 
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState('')
@@ -267,8 +236,6 @@ export default function Outbounds() {
             <option value="contacted">Contacted</option>
             <option value="responded">Responded</option>
             <option value="interested">Interested</option>
-            <option value="not_interested">Not Interested</option>
-            <option value="meeting_scheduled">Meeting Scheduled</option>
             <option value="converted">Converted</option>
           </select>
         </div>
@@ -440,7 +407,7 @@ export default function Outbounds() {
                             value={prospect.status}
                             onChange={(e) => {
                               const today = new Date()
-                              const engagementStatuses = ['contacted', 'responded', 'interested', 'not_interested', 'meeting_scheduled', 'converted']
+                              const engagementStatuses = ['contacted', 'responded', 'interested', 'converted']
                               const contactedDate = engagementStatuses.includes(e.target.value) 
                                 ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
                                 : undefined
@@ -454,8 +421,6 @@ export default function Outbounds() {
                             <option value="contacted">Contacted</option>
                             <option value="responded">Responded</option>
                             <option value="interested">Interested</option>
-                            <option value="not_interested">Not Interested</option>
-                            <option value="meeting_scheduled">Meeting Scheduled</option>
                             <option value="converted">Converted</option>
                           </select>
                         </div>
