@@ -413,22 +413,25 @@ export default function Outbounds() {
                         {prospect.location}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
-                        <div className="relative">
-                          <select
-                            value={prospect.template}
-                            onChange={(e) => {
-                              setOutboundProspects(prev => prev.map(p => 
-                                p.id === prospect.id ? { ...p, template: e.target.value } : p
-                              ))
-                            }}
-                            className="px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-                          >
-                            {['A', 'B', 'C', 'D', 'E'].map((templateId) => (
-                              <option key={templateId} value={templateId}>
-                                Template {templateId}
-                              </option>
-                            ))}
-                          </select>
+                        <div className="flex items-center space-x-1">
+                          {['A', 'B', 'C', 'D', 'E'].map((templateId) => (
+                            <button
+                              key={templateId}
+                              onClick={() => {
+                                setOutboundProspects(prev => prev.map(p => 
+                                  p.id === prospect.id ? { ...p, template: templateId } : p
+                                ))
+                              }}
+                              className={`relative group px-2 py-1 rounded text-xs font-medium transition-colors ${
+                                prospect.template === templateId 
+                                  ? getTemplateColor(templateId)
+                                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                              }`}
+                              title={`Template ${templateId}`}
+                            >
+                              {templateId}
+                            </button>
+                          ))}
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-xs">
