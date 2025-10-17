@@ -28,6 +28,31 @@ export default function Settings() {
     leadsLimit: 100
   })
 
+  // Mock billing history
+  const billingHistory = [
+    {
+      id: 'inv_001',
+      date: '2024-01-15',
+      amount: 10.00,
+      status: 'paid',
+      description: 'Pro Plan - January 2024'
+    },
+    {
+      id: 'inv_002', 
+      date: '2023-12-15',
+      amount: 10.00,
+      status: 'paid',
+      description: 'Pro Plan - December 2023'
+    },
+    {
+      id: 'inv_003',
+      date: '2023-11-15', 
+      amount: 10.00,
+      status: 'paid',
+      description: 'Pro Plan - November 2023'
+    }
+  ]
+
   const handleUpgrade = async () => {
     setIsUpgrading(true)
     try {
@@ -86,9 +111,15 @@ export default function Settings() {
       </div>
 
 
-      {/* Personal Information Section */}
-        <div className="bg-white shadow rounded-lg">
-          <div className="px-4 py-5 sm:p-6">
+      {/* General Section */}
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-lg font-medium text-gray-900">General</h2>
+          <p className="mt-1 text-sm text-gray-500">Manage your personal information and account details</p>
+      </div>
+
+      <div className="bg-white shadow rounded-lg">
+        <div className="px-4 py-5 sm:p-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900 mb-6">
               Personal Information
             </h3>
@@ -185,13 +216,18 @@ export default function Settings() {
                 >
                   {isSaving ? 'Saving...' : 'Save Changes'}
                 </button>
-              </div>
+            </div>
             </form>
           </div>
         </div>
+      </div>
 
-      {/* Billing & Subscription Section */}
+      {/* Billing Section */}
       <div className="space-y-6">
+        <div>
+          <h2 className="text-lg font-medium text-gray-900">Billing</h2>
+          <p className="mt-1 text-sm text-gray-500">Manage your subscription, payment method, and billing history</p>
+        </div>
           {/* Current Plan */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
@@ -323,7 +359,48 @@ export default function Settings() {
               </div>
             </div>
           )}
-        </div>
+
+          {/* Billing History */}
+          {subscription.plan === 'pro' && billingHistory.length > 0 && (
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
+                  Billing History
+                </h3>
+                <div className="space-y-3">
+                  {billingHistory.map((invoice) => (
+                    <div key={invoice.id} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                      <div className="flex items-center space-x-3">
+                        <div className="flex-shrink-0">
+                          <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <CheckIcon className="h-4 w-4 text-green-600" />
+                          </div>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-gray-900">{invoice.description}</p>
+                          <p className="text-xs text-gray-500">{new Date(invoice.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-4">
+                        <div className="text-right">
+                          <p className="text-sm font-medium text-gray-900">${invoice.amount.toFixed(2)}</p>
+                          <p className="text-xs text-green-600 capitalize">{invoice.status}</p>
+                        </div>
+                        <button className="text-sm text-primary-600 hover:text-primary-700 px-2 py-1 rounded hover:bg-primary-50">
+                          Download
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+      </div>
     </div>
   )
 }
