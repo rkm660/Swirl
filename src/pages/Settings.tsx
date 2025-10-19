@@ -268,22 +268,19 @@ export default function Settings() {
                     </li>
                   </ul>
                   
-                  <div className="mt-6">
-                    <div className="text-sm text-gray-600 mb-2">
-                      {subscription.plan === 'pro' 
-                        ? `Leads used: ${subscription.leadsUsed} (Unlimited)`
-                        : `Leads used: ${subscription.leadsUsed} / ${subscription.leadsLimit}`
-                      }
-                    </div>
-                    {subscription.plan === 'free' && (
+                  {subscription.plan === 'free' && (
+                    <div className="mt-6">
+                      <div className="text-sm text-gray-600 mb-2">
+                        Leads used: {subscription.leadsUsed} / {subscription.leadsLimit}
+                      </div>
                       <div className="w-full bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-primary-600 h-2 rounded-full" 
                           style={{ width: `${(subscription.leadsUsed / subscription.leadsLimit) * 100}%` }}
                         ></div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Pro Plan */}

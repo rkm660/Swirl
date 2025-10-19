@@ -42,7 +42,7 @@ export default function Home() {
           {/* Main Heading */}
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
             Turn connections into
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> opportunities</span>
+            <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"> opportunities</span>
           </h1>
 
           {/* Subtitle */}
@@ -71,9 +71,9 @@ export default function Home() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <button
               onClick={() => loginWithRedirect()}
-              className="group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              className="group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
               <span className="relative">Start building connections</span>
             </button>
           </div>
