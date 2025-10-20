@@ -31,9 +31,9 @@ export default function Home() {
       <div className="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
         {/* Animated Background Gradients */}
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-1/4 w-64 h-64 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob"></div>
-          <div className="absolute top-32 right-1/4 w-64 h-64 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-2000"></div>
-          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-4000"></div>
+          <div className="absolute top-20 left-1/4 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob"></div>
+          <div className="absolute top-32 right-1/4 w-80 h-80 bg-primary-300 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-80 h-80 bg-primary-100 rounded-full mix-blend-multiply filter blur-2xl opacity-50 animate-blob animation-delay-4000"></div>
         </div>
         
         {/* Background Pattern */}
@@ -51,9 +51,9 @@ export default function Home() {
           </div>
           <button
             onClick={() => loginWithRedirect()}
-            className="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 border border-blue-500"
+            className="group relative inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600 border border-primary-500"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
+            <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
             <svg className="relative w-5 h-5 mr-2" viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
             </svg>
@@ -75,7 +75,7 @@ export default function Home() {
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
               <button
                 onClick={() => loginWithRedirect()}
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
                 <span className="relative flex items-center">
@@ -164,19 +164,19 @@ export default function Home() {
               Loved by professionals worldwide
             </h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Join thousands of professionals who are growing their network with EverLeads.
+              Join thousands of professionals who are growing their network with Everleads.
             </p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {[
               {
-                content: "EverLeads has completely transformed how I manage my outreach. The interface is clean, the analytics are insightful, and I've seen a 40% increase in response rates.",
+                content: "Everleads has completely transformed how I manage my outreach. The interface is clean, the analytics are insightful, and I've seen a 40% increase in response rates.",
                 author: "Sarah Chen",
                 role: "Freelance Consultant",
                 rating: 5
               },
               {
-                content: "As a startup founder, I needed a simple way to track my networking efforts. EverLeads made it effortless to stay organized and follow up with prospects.",
+                content: "As a startup founder, I needed a simple way to track my networking efforts. Everleads made it effortless to stay organized and follow up with prospects.",
                 author: "Marcus Rodriguez",
                 role: "Startup Founder",
                 rating: 5
@@ -309,7 +309,7 @@ export default function Home() {
               Ready to grow your network?
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
-              Join thousands of professionals who are building meaningful connections with EverLeads.
+              Join thousands of professionals who are building meaningful connections with Everleads.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <button

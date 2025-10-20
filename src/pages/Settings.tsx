@@ -25,7 +25,8 @@ export default function Settings() {
   const [subscription, setSubscription] = useState({
     plan: 'free',
     leadsUsed: 23,
-    leadsLimit: 100
+    leadsLimit: 100,
+    billingCycle: 'monthly' // 'monthly' or 'annual'
   })
 
   // Mock billing history
@@ -53,12 +54,12 @@ export default function Settings() {
     }
   ]
 
-  const handleUpgrade = async () => {
+  const handleUpgrade = async (billingCycle: 'monthly' | 'annual') => {
     setIsUpgrading(true)
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
-      setSubscription(prev => ({ ...prev, plan: 'pro', leadsLimit: 999999 }))
+      setSubscription(prev => ({ ...prev, plan: 'pro', leadsLimit: 999999, billingCycle }))
     } catch (error) {
       console.error('Upgrade failed:', error)
     } finally {
@@ -92,7 +93,7 @@ export default function Settings() {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
-      setSubscription(prev => ({ ...prev, plan: 'free', leadsLimit: 100 }))
+      setSubscription(prev => ({ ...prev, plan: 'free', leadsLimit: 100, billingCycle: 'monthly' }))
     } catch (error) {
       console.error('Cancellation failed:', error)
     } finally {
@@ -233,108 +234,131 @@ export default function Settings() {
                 Current Plan
               </h3>
               
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {/* Free Plan */}
-                <div className={`relative rounded-lg border-2 p-6 ${
-                  subscription.plan === 'free' 
-                    ? 'border-primary-500 bg-primary-50' 
-                    : 'border-gray-200 bg-white'
-                }`}>
-                  {subscription.plan === 'free' && (
-                    <div className="absolute top-4 right-4">
-                      <div className="flex items-center space-x-1 text-primary-600">
-                        <CheckIcon className="h-4 w-4" />
-                        <span className="text-xs font-medium">Current</span>
+              <div className="space-y-6">
+                {/* Current Status */}
+                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Current Status</h4>
+                  
+                  {subscription.plan === 'free' ? (
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-sm font-medium text-gray-700">Free Plan - 100 leads included</span>
+                        <span className="text-sm text-gray-500">{subscription.leadsUsed} / {subscription.leadsLimit} used</span>
                       </div>
-                    </div>
-                  )}
-                  
-                  <div className="text-center">
-                    <h4 className="text-lg font-semibold text-gray-900">Free</h4>
-                    <p className="text-3xl font-bold text-gray-900 mt-2">$0</p>
-                    <p className="text-sm text-gray-500">per month</p>
-                  </div>
-                  
-                  <ul className="mt-6 space-y-3">
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">100 targeted leads</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Email support</span>
-                    </li>
-                  </ul>
-                  
-                  {subscription.plan === 'free' && (
-                    <div className="mt-6">
-                      <div className="text-sm text-gray-600 mb-2">
-                        Leads used: {subscription.leadsUsed} / {subscription.leadsLimit}
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
                         <div 
                           className="bg-primary-600 h-2 rounded-full" 
                           style={{ width: `${(subscription.leadsUsed / subscription.leadsLimit) * 100}%` }}
                         ></div>
                       </div>
+                      <p className="text-sm text-gray-600">
+                        {subscription.leadsLimit - subscription.leadsUsed} leads remaining. Upgrade to Pro for unlimited leads.
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">Pro Plan</span>
+                        <span className="text-sm text-green-600">Active</span>
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        Billing: ${subscription.billingCycle === 'annual' ? '100/year' : '10/month'} 
+                        ({subscription.billingCycle === 'annual' ? 'Save 17%' : 'Monthly billing'})
+                      </p>
                     </div>
                   )}
                 </div>
 
-                {/* Pro Plan */}
-                <div className={`relative rounded-lg border-2 p-6 ${
-                  subscription.plan === 'pro' 
-                    ? 'border-primary-500 bg-primary-50' 
-                    : 'border-gray-200 bg-white'
-                }`}>
-                  {subscription.plan === 'pro' && (
-                    <div className="absolute top-4 right-4">
-                      <div className="flex items-center space-x-1 text-primary-600">
-                        <CheckIcon className="h-4 w-4" />
-                        <span className="text-xs font-medium">Current</span>
+                {/* Upgrade Options */}
+                {subscription.plan === 'free' && (
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    {/* Monthly Plan */}
+                    <div className="relative rounded-lg border-2 border-gray-200 p-6">
+                      <div className="text-center">
+                        <h4 className="text-lg font-semibold text-gray-900">Monthly</h4>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">$10</p>
+                        <p className="text-sm text-gray-500">per month</p>
                       </div>
+                      
+                      <ul className="mt-6 space-y-3">
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Unlimited leads</span>
+                        </li>
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Custom templates</span>
+                        </li>
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Priority support</span>
+                        </li>
+                      </ul>
+                      
+                      <button
+                        onClick={() => handleUpgrade('monthly')}
+                        disabled={isUpgrading}
+                        className="w-full mt-6 bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
+                      >
+                        {isUpgrading ? 'Upgrading...' : 'Upgrade Monthly'}
+                      </button>
                     </div>
-                  )}
-                  
-                  <div className="text-center">
-                    <h4 className="text-lg font-semibold text-gray-900">Pro</h4>
-                    <p className="text-3xl font-bold text-gray-900 mt-2">$10</p>
-                    <p className="text-sm text-gray-500">per month</p>
+
+                    {/* Annual Plan */}
+                    <div className="relative rounded-lg border-2 border-primary-500 bg-primary-50 p-6">
+                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                        <span className="bg-primary-600 text-white px-3 py-1 rounded-full text-xs font-medium">Save 17%</span>
+                      </div>
+                      
+                      <div className="text-center">
+                        <h4 className="text-lg font-semibold text-gray-900">Annual</h4>
+                        <p className="text-3xl font-bold text-gray-900 mt-2">$100</p>
+                        <p className="text-sm text-gray-500">per year</p>
+                        <p className="text-xs text-green-600 mt-1">$8.33/month</p>
+                      </div>
+                      
+                      <ul className="mt-6 space-y-3">
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Unlimited leads</span>
+                        </li>
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Custom templates</span>
+                        </li>
+                        <li className="flex items-center">
+                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                          <span className="text-sm text-gray-600">Priority support</span>
+                        </li>
+                      </ul>
+                      
+                      <button
+                        onClick={() => handleUpgrade('annual')}
+                        disabled={isUpgrading}
+                        className="w-full mt-6 bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
+                      >
+                        {isUpgrading ? 'Upgrading...' : 'Upgrade Annual'}
+                      </button>
+                    </div>
                   </div>
-                  
-                  <ul className="mt-6 space-y-3">
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Unlimited leads</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Custom templates</span>
-                    </li>
-                    <li className="flex items-center">
-                      <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                      <span className="text-sm text-gray-600">Priority support</span>
-                    </li>
-                  </ul>
-                  
-                  {subscription.plan === 'free' ? (
-                    <button
-                      onClick={handleUpgrade}
-                      disabled={isUpgrading}
-                      className="w-full mt-6 bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 disabled:opacity-50"
-                    >
-                      {isUpgrading ? 'Upgrading...' : 'Upgrade to Pro'}
-                    </button>
-                  ) : (
+                )}
+
+                {/* Cancel Subscription */}
+                {subscription.plan === 'pro' && (
+                  <div className="bg-white border border-gray-200 rounded-lg p-6">
+                    <h4 className="text-lg font-semibold text-gray-900 mb-4">Manage Subscription</h4>
+                    <p className="text-sm text-gray-600 mb-4">
+                      You can cancel your subscription at any time. You'll continue to have access until the end of your billing period.
+                    </p>
                     <button
                       onClick={handleCancelSubscription}
                       disabled={isCancelling}
-                      className="w-full mt-6 bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
+                      className="bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50"
                     >
                       {isCancelling ? 'Cancelling...' : 'Cancel Subscription'}
                     </button>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
