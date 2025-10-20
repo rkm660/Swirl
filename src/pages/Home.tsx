@@ -28,25 +28,33 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-primary-50">
+      <div className="relative overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-cyan-50">
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-1/4 w-64 h-64 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob"></div>
+          <div className="absolute top-32 right-1/4 w-64 h-64 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-2000"></div>
+          <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-64 h-64 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-60 animate-blob animation-delay-4000"></div>
+        </div>
+        
         {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 opacity-8">
           <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.15) 1px, transparent 0)',
-            backgroundSize: '40px 40px'
+            backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(99, 102, 241, 0.2) 1px, transparent 0)',
+            backgroundSize: '50px 50px'
           }}></div>
         </div>
 
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
-          <div className="flex items-center space-x-3">
-            <img src="/logo.svg" alt="EverLeads" className="h-10 w-auto" />
+          <div className="flex items-center space-x-4">
+            <img src="/logo.svg" alt="Everleads" className="h-16 w-auto drop-shadow-lg" />
           </div>
           <button
             onClick={() => loginWithRedirect()}
-            className="rounded-full bg-primary-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+            className="group relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
           >
-            Get Started
+            <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
+            <span className="relative">Get Started</span>
           </button>
         </nav>
 
@@ -320,7 +328,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <img src="/logo.svg" alt="EverLeads" className="h-8 w-auto" />
+              <img src="/logo.svg" alt="Everleads" className="h-8 w-auto" />
             </div>
             <div className="flex items-center space-x-8 text-sm text-gray-500">
               <a href="#" className="hover:text-gray-900">Privacy</a>
