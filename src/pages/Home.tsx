@@ -198,7 +198,7 @@ export default function Home() {
 
 
       {/* Pricing Section */}
-      <div className="bg-gray-50 py-24 sm:py-32">
+      <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -330,7 +330,7 @@ export default function Home() {
           </div>
           <div className="mt-8 border-t border-gray-200 pt-8">
             <p className="text-sm text-gray-500 text-center">
-              © 2025 EverLeads. All rights reserved.
+              © 2025 Everleads. All rights reserved.
             </p>
           </div>
         </div>
