@@ -22,7 +22,7 @@ export default function Dashboard() {
       color: 'bg-blue-500'
     },
     {
-      name: 'Outreach Sent',
+      name: 'Outreach',
       value: timeRange === 'daily' ? '89' : timeRange === 'weekly' ? '567' : '2,234',
       change: timeRange === 'daily' ? '+12%' : timeRange === 'weekly' ? '+8%' : '+18%',
       changeType: 'increase',
