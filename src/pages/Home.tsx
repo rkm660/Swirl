@@ -39,9 +39,8 @@ export default function Home() {
 
         {/* Navigation */}
         <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
-          <div className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="EverLeads" className="h-8 w-auto" />
-            <span className="text-xl font-bold text-gray-900">EverLeads</span>
+          <div className="flex items-center space-x-3">
+            <img src="/logo.svg" alt="EverLeads" className="h-10 w-auto" />
           </div>
           <button
             onClick={() => loginWithRedirect()}
@@ -58,11 +57,11 @@ export default function Home() {
               Turn connections into
               <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"> opportunities</span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+            <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
               The simple way to manage your outreach, track responses, and grow your network. 
               Perfect for freelancers, consultants, and professionals who want to build meaningful connections.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
               <button
                 onClick={() => loginWithRedirect()}
                 className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
@@ -82,7 +81,7 @@ export default function Home() {
             {/* Trust Indicators */}
             <div className="mt-16">
               <p className="text-sm text-gray-500 mb-8">Trusted by professionals worldwide</p>
-              <div className="flex items-center justify-center space-x-12 text-sm text-gray-400">
+              <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-12 text-sm text-gray-400">
                 <div className="flex items-center space-x-2">
                   <CheckCircleIcon className="h-5 w-5 text-green-500" />
                   <span>Free forever plan</span>
@@ -200,7 +199,7 @@ export default function Home() {
       {/* Stats Section */}
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Trusted by thousands of professionals
             </h2>
@@ -220,6 +219,99 @@ export default function Home() {
                 <div className="text-sm text-gray-600 mt-2">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Pricing Section */}
+      <div className="bg-gray-50 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Simple, transparent pricing
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Choose the plan that works for you. Start free, upgrade when you're ready.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            {/* Free Plan */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-900">Free</h3>
+                <p className="mt-4 text-4xl font-bold text-gray-900">$0</p>
+                <p className="mt-2 text-sm text-gray-500">per month</p>
+              </div>
+              <ul className="mt-8 space-y-4">
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">100 targeted leads</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Email support</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Basic analytics</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Core features</span>
+                </li>
+              </ul>
+              <button
+                onClick={() => loginWithRedirect()}
+                className="mt-8 w-full rounded-full bg-gray-900 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+              >
+                Get Started Free
+              </button>
+            </div>
+
+            {/* Pro Plan */}
+            <div className="bg-white rounded-2xl shadow-lg border-2 border-primary-600 p-8 relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-primary-600 text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+              </div>
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-gray-900">Pro</h3>
+                <p className="mt-4 text-4xl font-bold text-gray-900">$10</p>
+                <p className="mt-2 text-sm text-gray-500">per month</p>
+              </div>
+              <ul className="mt-8 space-y-4">
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Unlimited leads</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Custom templates</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Priority support</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">Advanced analytics</span>
+                </li>
+                <li className="flex items-center">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500 mr-3" />
+                  <span className="text-gray-600">All features</span>
+                </li>
+              </ul>
+            <button
+              onClick={() => loginWithRedirect()}
+                className="mt-8 w-full rounded-full bg-primary-600 px-6 py-3 text-base font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+            >
+                Start Pro Trial
+            </button>
+            </div>
+          </div>
+          <div className="mt-12 text-center">
+            <p className="text-sm text-gray-500">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
           </div>
         </div>
       </div>
@@ -253,9 +345,8 @@ export default function Home() {
       <footer className="bg-white">
         <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src="/logo.svg" alt="EverLeads" className="h-6 w-auto" />
-              <span className="text-lg font-semibold text-gray-900">EverLeads</span>
+            <div className="flex items-center space-x-3">
+              <img src="/logo.svg" alt="EverLeads" className="h-8 w-auto" />
             </div>
             <div className="flex items-center space-x-8 text-sm text-gray-500">
               <a href="#" className="hover:text-gray-900">Privacy</a>
