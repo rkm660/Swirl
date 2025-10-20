@@ -148,7 +148,7 @@ export default function Home() {
       {/* Social Proof Section */}
       <div className="bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Loved by professionals worldwide
             </h2>
@@ -196,32 +196,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Trusted by thousands of professionals
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              See why professionals choose EverLeads to grow their network.
-            </p>
-          </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-            {[
-              { number: "10,000+", label: "Active Users" },
-              { number: "50,000+", label: "Connections Made" },
-              { number: "95%", label: "Satisfaction Rate" },
-              { number: "2 min", label: "Average Setup Time" }
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-primary-600">{stat.number}</div>
-                <div className="text-sm text-gray-600 mt-2">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Pricing Section */}
       <div className="bg-gray-50 py-24 sm:py-32">
@@ -356,7 +330,7 @@ export default function Home() {
           </div>
           <div className="mt-8 border-t border-gray-200 pt-8">
             <p className="text-sm text-gray-500 text-center">
-              © 2024 EverLeads. All rights reserved.
+              © 2025 EverLeads. All rights reserved.
             </p>
           </div>
         </div>
