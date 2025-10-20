@@ -38,9 +38,9 @@ export default function Dashboard() {
       color: 'bg-green-500'
     },
     {
-      name: 'Conversion Rate',
-      value: timeRange === 'daily' ? '18.2%' : timeRange === 'weekly' ? '19.1%' : '21.3%',
-      change: timeRange === 'daily' ? '+2.1%' : timeRange === 'weekly' ? '+3.2%' : '+5.1%',
+      name: 'Engaged',
+      value: timeRange === 'daily' ? '8' : timeRange === 'weekly' ? '45' : '189',
+      change: timeRange === 'daily' ? '+3%' : timeRange === 'weekly' ? '+7%' : '+15%',
       changeType: 'increase',
       icon: ArrowTrendingUpIcon,
       color: 'bg-orange-500'
@@ -50,25 +50,25 @@ export default function Dashboard() {
   // Mock time series data
   const timeSeriesData = {
     daily: [
-      { period: 'Mon', leads: 42, outreach: 78, responses: 19 },
-      { period: 'Tue', leads: 38, outreach: 89, responses: 23 },
-      { period: 'Wed', leads: 45, outreach: 92, responses: 21 },
-      { period: 'Thu', leads: 47, outreach: 89, responses: 23 },
-      { period: 'Fri', leads: 41, outreach: 85, responses: 18 },
-      { period: 'Sat', leads: 23, outreach: 45, responses: 12 },
-      { period: 'Sun', leads: 19, outreach: 38, responses: 9 }
+      { period: 'Mon', leads: 42, outreach: 78, responses: 19, engaged: 6 },
+      { period: 'Tue', leads: 38, outreach: 89, responses: 23, engaged: 8 },
+      { period: 'Wed', leads: 45, outreach: 92, responses: 21, engaged: 7 },
+      { period: 'Thu', leads: 47, outreach: 89, responses: 23, engaged: 8 },
+      { period: 'Fri', leads: 41, outreach: 85, responses: 18, engaged: 6 },
+      { period: 'Sat', leads: 23, outreach: 45, responses: 12, engaged: 4 },
+      { period: 'Sun', leads: 19, outreach: 38, responses: 9, engaged: 3 }
     ],
     weekly: [
-      { period: 'Dec 2-8', leads: 287, outreach: 1234, responses: 156 },
-      { period: 'Dec 9-15', leads: 312, outreach: 1456, responses: 189 },
-      { period: 'Dec 16-22', leads: 298, outreach: 1378, responses: 167 },
-      { period: 'Dec 23-29', leads: 350, outreach: 1567, responses: 203 }
+      { period: 'Dec 2-8', leads: 287, outreach: 1234, responses: 156, engaged: 52 },
+      { period: 'Dec 9-15', leads: 312, outreach: 1456, responses: 189, engaged: 63 },
+      { period: 'Dec 16-22', leads: 298, outreach: 1378, responses: 167, engaged: 56 },
+      { period: 'Dec 23-29', leads: 350, outreach: 1567, responses: 203, engaged: 68 }
     ],
     monthly: [
-      { period: 'Jan', leads: 1156, outreach: 4789, responses: 623 },
-      { period: 'Feb', leads: 1234, outreach: 5123, responses: 712 },
-      { period: 'Mar', leads: 1189, outreach: 4956, responses: 689 },
-      { period: 'Apr', leads: 1247, outreach: 5234, responses: 756 }
+      { period: 'Jan', leads: 1156, outreach: 4789, responses: 623, engaged: 208 },
+      { period: 'Feb', leads: 1234, outreach: 5123, responses: 712, engaged: 238 },
+      { period: 'Mar', leads: 1189, outreach: 4956, responses: 689, engaged: 230 },
+      { period: 'Apr', leads: 1247, outreach: 5234, responses: 756, engaged: 252 }
     ]
   }
 
@@ -155,10 +155,11 @@ export default function Dashboard() {
           
           <div className="space-y-4">
             {currentData.map((item, index) => {
-              const maxValue = Math.max(...currentData.map(d => Math.max(d.leads, d.outreach, d.responses)))
+              const maxValue = Math.max(...currentData.map(d => Math.max(d.leads, d.outreach, d.responses, d.engaged)))
               const leadsWidth = (item.leads / maxValue) * 100
               const outreachWidth = (item.outreach / maxValue) * 100
               const responsesWidth = (item.responses / maxValue) * 100
+              const engagedWidth = (item.engaged / maxValue) * 100
               
               return (
                 <div key={index} className="space-y-2">
@@ -170,6 +171,7 @@ export default function Dashboard() {
                       <span>{item.leads} leads</span>
                       <span>{item.outreach} outreach</span>
                       <span>{item.responses} responses</span>
+                      <span>{item.engaged} engaged</span>
                     </div>
                   </div>
                   <div className="flex items-end space-x-1 h-8">
@@ -187,6 +189,11 @@ export default function Dashboard() {
                       className="bg-green-500 rounded-sm"
                       style={{ width: `${responsesWidth}%`, height: '100%' }}
                       title={`${item.responses} responses`}
+                    ></div>
+                    <div 
+                      className="bg-orange-500 rounded-sm"
+                      style={{ width: `${engagedWidth}%`, height: '100%' }}
+                      title={`${item.engaged} engaged`}
                     ></div>
                   </div>
                 </div>
@@ -207,6 +214,89 @@ export default function Dashboard() {
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
               <span className="text-sm text-gray-600">Responses</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-orange-500 rounded-sm"></div>
+              <span className="text-sm text-gray-600">Engaged</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Funnel Visualization */}
+      <div className="bg-white shadow rounded-lg p-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-lg font-medium text-gray-900">Conversion Funnel</h3>
+            <p className="mt-1 text-sm text-gray-500">Track your progress through the outreach pipeline</p>
+          </div>
+        </div>
+        
+        <div className="space-y-4">
+          {/* Funnel Steps */}
+          <div className="flex flex-col items-center space-y-4">
+            {/* Leads Generated */}
+            <div className="w-full max-w-md">
+              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 text-center">
+                <div className="text-2xl font-bold text-blue-900">
+                  {timeRange === 'daily' ? '47' : timeRange === 'weekly' ? '312' : '1,247'}
+                </div>
+                <div className="text-sm text-blue-700">Leads Generated</div>
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="flex items-center">
+              <div className="w-0.5 h-8 bg-gray-300"></div>
+            </div>
+            
+            {/* Outreach */}
+            <div className="w-full max-w-sm">
+              <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-4 text-center">
+                <div className="text-xl font-bold text-purple-900">
+                  {timeRange === 'daily' ? '89' : timeRange === 'weekly' ? '567' : '2,234'}
+                </div>
+                <div className="text-sm text-purple-700">Outreach</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {timeRange === 'daily' ? '189%' : timeRange === 'weekly' ? '182%' : '179%'} of leads
+                </div>
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="flex items-center">
+              <div className="w-0.5 h-8 bg-gray-300"></div>
+            </div>
+            
+            {/* Responses */}
+            <div className="w-full max-w-xs">
+              <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4 text-center">
+                <div className="text-lg font-bold text-green-900">
+                  {timeRange === 'daily' ? '23' : timeRange === 'weekly' ? '156' : '623'}
+                </div>
+                <div className="text-sm text-green-700">Responses</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {timeRange === 'daily' ? '26%' : timeRange === 'weekly' ? '27%' : '28%'} response rate
+                </div>
+              </div>
+            </div>
+            
+            {/* Arrow */}
+            <div className="flex items-center">
+              <div className="w-0.5 h-8 bg-gray-300"></div>
+            </div>
+            
+            {/* Engaged */}
+            <div className="w-full max-w-xs">
+              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4 text-center">
+                <div className="text-lg font-bold text-orange-900">
+                  {timeRange === 'daily' ? '8' : timeRange === 'weekly' ? '45' : '189'}
+                </div>
+                <div className="text-sm text-orange-700">Engaged</div>
+                <div className="text-xs text-gray-500 mt-1">
+                  {timeRange === 'daily' ? '35%' : timeRange === 'weekly' ? '29%' : '30%'} of responses
+                </div>
+              </div>
             </div>
           </div>
         </div>

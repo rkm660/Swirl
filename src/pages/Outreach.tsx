@@ -10,7 +10,7 @@ interface OutboundProspect {
   location: string
   linkedinUrl: string
   template: string
-  status: 'not_contacted' | 'contacted' | 'responded' | 'interested' | 'engaged'
+  status: 'not_contacted' | 'contacted' | 'not_interested' | 'engaged'
   contactedDate?: string
 }
 
@@ -234,8 +234,7 @@ export default function Outreach() {
             <option value="">All Statuses</option>
             <option value="not_contacted">Not Contacted</option>
             <option value="contacted">Contacted</option>
-            <option value="responded">Responded</option>
-            <option value="interested">Interested</option>
+            <option value="not_interested">Not Interested</option>
             <option value="engaged">Engaged</option>
           </select>
         </div>
@@ -407,7 +406,7 @@ export default function Outreach() {
                             value={prospect.status}
                             onChange={(e) => {
                               const today = new Date()
-                              const engagementStatuses = ['contacted', 'responded', 'interested', 'engaged']
+                              const engagementStatuses = ['contacted', 'not_interested', 'engaged']
                               const contactedDate = engagementStatuses.includes(e.target.value) 
                                 ? `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
                                 : undefined
@@ -419,8 +418,7 @@ export default function Outreach() {
                           >
                             <option value="not_contacted">Not Contacted</option>
                             <option value="contacted">Contacted</option>
-                            <option value="responded">Responded</option>
-                            <option value="interested">Interested</option>
+                            <option value="not_interested">Not Interested</option>
                             <option value="engaged">Engaged</option>
                           </select>
                         </div>
