@@ -15,7 +15,7 @@ export default function Dashboard() {
   const stats = [
     {
       name: 'Leads Generated',
-      value: timeRange === 'daily' ? '47' : timeRange === 'weekly' ? '312' : '1,247',
+      value: timeRange === 'daily' ? '89' : timeRange === 'weekly' ? '567' : '2,234',
       change: timeRange === 'daily' ? '+8%' : timeRange === 'weekly' ? '+15%' : '+23%',
       changeType: 'increase',
       icon: UserGroupIcon,
@@ -23,7 +23,7 @@ export default function Dashboard() {
     },
     {
       name: 'Outreach',
-      value: timeRange === 'daily' ? '89' : timeRange === 'weekly' ? '567' : '2,234',
+      value: timeRange === 'daily' ? '47' : timeRange === 'weekly' ? '312' : '1,247',
       change: timeRange === 'daily' ? '+12%' : timeRange === 'weekly' ? '+8%' : '+18%',
       changeType: 'increase',
       icon: PaperAirplaneIcon,
@@ -50,25 +50,25 @@ export default function Dashboard() {
   // Mock time series data
   const timeSeriesData = {
     daily: [
-      { period: 'Mon', leads: 42, outreach: 78, responses: 19, engaged: 6 },
-      { period: 'Tue', leads: 38, outreach: 89, responses: 23, engaged: 8 },
-      { period: 'Wed', leads: 45, outreach: 92, responses: 21, engaged: 7 },
-      { period: 'Thu', leads: 47, outreach: 89, responses: 23, engaged: 8 },
-      { period: 'Fri', leads: 41, outreach: 85, responses: 18, engaged: 6 },
-      { period: 'Sat', leads: 23, outreach: 45, responses: 12, engaged: 4 },
-      { period: 'Sun', leads: 19, outreach: 38, responses: 9, engaged: 3 }
+      { period: 'Mon', leads: 78, outreach: 42, responses: 19, engaged: 6 },
+      { period: 'Tue', leads: 89, outreach: 38, responses: 23, engaged: 8 },
+      { period: 'Wed', leads: 92, outreach: 45, responses: 21, engaged: 7 },
+      { period: 'Thu', leads: 89, outreach: 47, responses: 23, engaged: 8 },
+      { period: 'Fri', leads: 85, outreach: 41, responses: 18, engaged: 6 },
+      { period: 'Sat', leads: 45, outreach: 23, responses: 12, engaged: 4 },
+      { period: 'Sun', leads: 38, outreach: 19, responses: 9, engaged: 3 }
     ],
     weekly: [
-      { period: 'Dec 2-8', leads: 287, outreach: 1234, responses: 156, engaged: 52 },
-      { period: 'Dec 9-15', leads: 312, outreach: 1456, responses: 189, engaged: 63 },
-      { period: 'Dec 16-22', leads: 298, outreach: 1378, responses: 167, engaged: 56 },
-      { period: 'Dec 23-29', leads: 350, outreach: 1567, responses: 203, engaged: 68 }
+      { period: 'Dec 2-8', leads: 1234, outreach: 287, responses: 156, engaged: 52 },
+      { period: 'Dec 9-15', leads: 1456, outreach: 312, responses: 189, engaged: 63 },
+      { period: 'Dec 16-22', leads: 1378, outreach: 298, responses: 167, engaged: 56 },
+      { period: 'Dec 23-29', leads: 1567, outreach: 350, responses: 203, engaged: 68 }
     ],
     monthly: [
-      { period: 'Jan', leads: 1156, outreach: 4789, responses: 623, engaged: 208 },
-      { period: 'Feb', leads: 1234, outreach: 5123, responses: 712, engaged: 238 },
-      { period: 'Mar', leads: 1189, outreach: 4956, responses: 689, engaged: 230 },
-      { period: 'Apr', leads: 1247, outreach: 5234, responses: 756, engaged: 252 }
+      { period: 'Jan', leads: 4789, outreach: 1156, responses: 623, engaged: 208 },
+      { period: 'Feb', leads: 5123, outreach: 1234, responses: 712, engaged: 238 },
+      { period: 'Mar', leads: 4956, outreach: 1189, responses: 689, engaged: 230 },
+      { period: 'Apr', leads: 5234, outreach: 1247, responses: 756, engaged: 252 }
     ]
   }
 
@@ -223,84 +223,6 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Funnel Visualization */}
-      <div className="bg-white shadow rounded-lg p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="text-lg font-medium text-gray-900">Conversion Funnel</h3>
-            <p className="mt-1 text-sm text-gray-500">Track your progress through the outreach pipeline</p>
-          </div>
-        </div>
-        
-        <div className="space-y-4">
-          {/* Funnel Steps */}
-          <div className="flex flex-col items-center space-y-4">
-            {/* Leads Generated */}
-            <div className="w-full max-w-md">
-              <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-4 text-center">
-                <div className="text-2xl font-bold text-blue-900">
-                  {timeRange === 'daily' ? '47' : timeRange === 'weekly' ? '312' : '1,247'}
-                </div>
-                <div className="text-sm text-blue-700">Leads Generated</div>
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex items-center">
-              <div className="w-0.5 h-8 bg-gray-300"></div>
-            </div>
-            
-            {/* Outreach */}
-            <div className="w-full max-w-sm">
-              <div className="bg-purple-50 border-2 border-purple-200 rounded-lg p-4 text-center">
-                <div className="text-xl font-bold text-purple-900">
-                  {timeRange === 'daily' ? '89' : timeRange === 'weekly' ? '567' : '2,234'}
-                </div>
-                <div className="text-sm text-purple-700">Outreach</div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {timeRange === 'daily' ? '189%' : timeRange === 'weekly' ? '182%' : '179%'} of leads
-                </div>
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex items-center">
-              <div className="w-0.5 h-8 bg-gray-300"></div>
-            </div>
-            
-            {/* Responses */}
-            <div className="w-full max-w-xs">
-              <div className="bg-green-50 border-2 border-green-200 rounded-lg p-4 text-center">
-                <div className="text-lg font-bold text-green-900">
-                  {timeRange === 'daily' ? '23' : timeRange === 'weekly' ? '156' : '623'}
-                </div>
-                <div className="text-sm text-green-700">Responses</div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {timeRange === 'daily' ? '26%' : timeRange === 'weekly' ? '27%' : '28%'} response rate
-                </div>
-              </div>
-            </div>
-            
-            {/* Arrow */}
-            <div className="flex items-center">
-              <div className="w-0.5 h-8 bg-gray-300"></div>
-            </div>
-            
-            {/* Engaged */}
-            <div className="w-full max-w-xs">
-              <div className="bg-orange-50 border-2 border-orange-200 rounded-lg p-4 text-center">
-                <div className="text-lg font-bold text-orange-900">
-                  {timeRange === 'daily' ? '8' : timeRange === 'weekly' ? '45' : '189'}
-                </div>
-                <div className="text-sm text-orange-700">Engaged</div>
-                <div className="text-xs text-gray-500 mt-1">
-                  {timeRange === 'daily' ? '35%' : timeRange === 'weekly' ? '29%' : '30%'} of responses
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
