@@ -59,7 +59,7 @@ export default function Home() {
             </h1>
             <p className="mt-6 text-xl leading-8 text-gray-600 max-w-3xl mx-auto">
               The simple way to manage your outreach, track responses, and grow your network. 
-              Perfect for freelancers, consultants, and professionals who want to build meaningful connections.
+              Perfect for freelancers, consultants, and entrepreneurs who want to build connections.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4">
               <button
