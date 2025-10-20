@@ -115,8 +115,7 @@ export default function Settings() {
       <div className="space-y-6">
         <div>
           <h2 className="text-lg font-medium text-gray-900">General</h2>
-          <p className="mt-1 text-sm text-gray-500">Manage your personal information and account details</p>
-      </div>
+        </div>
 
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
@@ -226,7 +225,6 @@ export default function Settings() {
       <div className="space-y-6">
         <div>
           <h2 className="text-lg font-medium text-gray-900">Billing</h2>
-          <p className="mt-1 text-sm text-gray-500">Manage your subscription, payment method, and billing history</p>
         </div>
           {/* Current Plan */}
           <div className="bg-white shadow rounded-lg">
