@@ -1,6 +1,18 @@
 import { useAuth0 } from '@auth0/auth0-react'
 import { Navigate } from 'react-router-dom'
 import LoadingSpinner from '../components/LoadingSpinner'
+import { 
+  CheckCircleIcon, 
+  StarIcon, 
+  UserGroupIcon, 
+  ChartBarIcon,
+  PaperAirplaneIcon,
+  ArrowRightIcon,
+  PlayIcon,
+  SparklesIcon,
+  BoltIcon,
+  HeartIcon
+} from '@heroicons/react/24/outline'
 
 export default function Home() {
   const { isAuthenticated, loginWithRedirect, isLoading } = useAuth0()
@@ -14,84 +26,250 @@ export default function Home() {
   }
 
   return (
-    <div className="relative isolate min-h-screen overflow-hidden bg-gradient-to-br from-primary-50 via-primary-100 to-primary-200">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(156, 146, 172, 0.15) 1px, transparent 0)',
-          backgroundSize: '20px 20px'
-        }}></div>
-      </div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-20 h-20 bg-primary-200 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute top-40 right-20 w-16 h-16 bg-primary-300 rounded-full opacity-20 animate-pulse delay-1000"></div>
-      <div className="absolute bottom-40 left-20 w-24 h-24 bg-primary-200 rounded-full opacity-20 animate-pulse delay-2000"></div>
-      <div className="absolute bottom-20 right-10 w-12 h-12 bg-primary-300 rounded-full opacity-20 animate-pulse delay-500"></div>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-primary-50">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.15) 1px, transparent 0)',
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
 
-      <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:flex lg:items-center lg:gap-x-10 lg:px-8 lg:py-40">
-        <div className="mx-auto max-w-2xl text-center">
-          {/* Logo */}
-          <div className="mt-10 flex justify-center mb-8">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full blur-lg opacity-30"></div>
-              <img src="/logo.svg" alt="EverLeads" className="relative h-32 w-auto sm:h-40" />
-            </div>
+        {/* Navigation */}
+        <nav className="relative z-10 flex items-center justify-between p-6 lg:px-8">
+          <div className="flex items-center space-x-2">
+            <img src="/logo.svg" alt="EverLeads" className="h-8 w-auto" />
+            <span className="text-xl font-bold text-gray-900">EverLeads</span>
           </div>
+          <button
+            onClick={() => loginWithRedirect()}
+            className="rounded-full bg-primary-600 px-6 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          >
+            Get Started
+          </button>
+        </nav>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Turn connections into
-            <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"> opportunities</span>
-          </h1>
-
-          {/* Subtitle */}
-          <p className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
-            The simple way to manage your outreach, track responses, and grow your network. 
-            Perfect for freelancers, consultants, and professionals who want to build meaningful connections.
-          </p>
-
-          {/* Features */}
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3 max-w-2xl mx-auto">
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-              <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-              <span>100 free leads</span>
+        {/* Hero Content */}
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
+          <div className="mx-auto max-w-4xl text-center">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
+              Turn connections into
+              <span className="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"> opportunities</span>
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-3xl mx-auto">
+              The simple way to manage your outreach, track responses, and grow your network. 
+              Perfect for freelancers, consultants, and professionals who want to build meaningful connections.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <button
+                onClick={() => loginWithRedirect()}
+                className="group relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
+              >
+                <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
+                <span className="relative flex items-center">
+                  Start building connections
+                  <ArrowRightIcon className="ml-2 h-5 w-5" />
+                </span>
+              </button>
+              <button className="group inline-flex items-center justify-center px-6 py-4 text-base font-semibold text-gray-900 bg-white border border-gray-300 rounded-full shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                <PlayIcon className="mr-2 h-5 w-5" />
+                Watch Demo
+              </button>
             </div>
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-              <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-              <span>Smart templates</span>
-            </div>
-            <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-              <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-              <span>Easy tracking</span>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="mt-10 flex items-center justify-center gap-x-6">
-            <button
-              onClick={() => loginWithRedirect()}
-              className="group relative inline-flex items-center justify-center px-8 py-3 text-sm font-semibold text-white bg-gradient-to-r from-primary-600 to-primary-700 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 rounded-full blur opacity-0 group-hover:opacity-75 transition-opacity duration-200"></span>
-              <span className="relative">Start building connections</span>
-            </button>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="mt-12 text-center">
-            <p className="text-sm text-gray-500 mb-4">Join professionals who are growing their network</p>
-            <div className="flex items-center justify-center space-x-8 opacity-60">
-              <div className="text-xs text-gray-400">✓ No credit card required</div>
-              <div className="text-xs text-gray-400">✓ Free forever plan</div>
-              <div className="text-xs text-gray-400">✓ Setup in 2 minutes</div>
+            
+            {/* Trust Indicators */}
+            <div className="mt-16">
+              <p className="text-sm text-gray-500 mb-8">Trusted by professionals worldwide</p>
+              <div className="flex items-center justify-center space-x-12 text-sm text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                  <span>Free forever plan</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircleIcon className="h-5 w-5 text-blue-500" />
+                  <span>Setup in 2 minutes</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <CheckCircleIcon className="h-5 w-5 text-purple-500" />
+                  <span>No credit card required</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white/50 to-transparent"></div>
+      {/* Features Section */}
+      <div className="py-24 sm:py-32 bg-white">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Everything you need to grow your network
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Streamline your outreach process with powerful tools designed for modern professionals.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+              <div className="flex flex-col">
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                  <UserGroupIcon className="h-5 w-5 flex-none text-primary-600" />
+                  Lead Management
+                </dt>
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">Organize and track your prospects with our intuitive lead management system. Never lose track of a potential connection again.</p>
+                </dd>
+              </div>
+              <div className="flex flex-col">
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                  <PaperAirplaneIcon className="h-5 w-5 flex-none text-primary-600" />
+                  Smart Outreach
+                </dt>
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">Send personalized messages at scale with our template system. Track delivery and responses in real-time.</p>
+                </dd>
+              </div>
+              <div className="flex flex-col">
+                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
+                  <ChartBarIcon className="h-5 w-5 flex-none text-primary-600" />
+                  Analytics & Insights
+                </dt>
+                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
+                  <p className="flex-auto">Understand what works with detailed analytics. Track conversion rates and optimize your outreach strategy.</p>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      {/* Social Proof Section */}
+      <div className="bg-gray-50 py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Loved by professionals worldwide
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Join thousands of professionals who are growing their network with EverLeads.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {[
+              {
+                content: "EverLeads has completely transformed how I manage my outreach. The interface is clean, the analytics are insightful, and I've seen a 40% increase in response rates.",
+                author: "Sarah Chen",
+                role: "Freelance Consultant",
+                rating: 5
+              },
+              {
+                content: "As a startup founder, I needed a simple way to track my networking efforts. EverLeads made it effortless to stay organized and follow up with prospects.",
+                author: "Marcus Rodriguez",
+                role: "Startup Founder",
+                rating: 5
+              },
+              {
+                content: "The template system is a game-changer. I can personalize messages at scale while maintaining that personal touch that gets responses.",
+                author: "Emily Watson",
+                role: "Sales Professional",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm">
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <StarIcon key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                <blockquote className="text-gray-600 mb-6">
+                  "{testimonial.content}"
+                </blockquote>
+                <div>
+                  <div className="font-semibold text-gray-900">{testimonial.author}</div>
+                  <div className="text-sm text-gray-500">{testimonial.role}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div className="bg-white py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Trusted by thousands of professionals
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              See why professionals choose EverLeads to grow their network.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+            {[
+              { number: "10,000+", label: "Active Users" },
+              { number: "50,000+", label: "Connections Made" },
+              { number: "95%", label: "Satisfaction Rate" },
+              { number: "2 min", label: "Average Setup Time" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl font-bold text-primary-600">{stat.number}</div>
+                <div className="text-sm text-gray-600 mt-2">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="bg-primary-600">
+        <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              Ready to grow your network?
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-primary-100">
+              Join thousands of professionals who are building meaningful connections with EverLeads.
+            </p>
+            <div className="mt-10 flex items-center justify-center gap-x-6">
+              <button
+                onClick={() => loginWithRedirect()}
+                className="rounded-full bg-white px-8 py-4 text-base font-semibold text-primary-600 shadow-sm hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              >
+                Get Started Free
+              </button>
+              <button className="text-base font-semibold leading-6 text-white hover:text-primary-100">
+                Learn more <span aria-hidden="true">→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <img src="/logo.svg" alt="EverLeads" className="h-6 w-auto" />
+              <span className="text-lg font-semibold text-gray-900">EverLeads</span>
+            </div>
+            <div className="flex items-center space-x-8 text-sm text-gray-500">
+              <a href="#" className="hover:text-gray-900">Privacy</a>
+              <a href="#" className="hover:text-gray-900">Terms</a>
+              <a href="#" className="hover:text-gray-900">Support</a>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-gray-200 pt-8">
+            <p className="text-sm text-gray-500 text-center">
+              © 2024 EverLeads. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
