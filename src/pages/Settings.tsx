@@ -13,6 +13,13 @@ export default function Settings() {
   const [isSaving, setIsSaving] = useState(false)
   const [isCancelling, setIsCancelling] = useState(false)
 
+  // Pro plan features
+  const proFeatures = [
+    'Unlimited leads',
+    'Custom templates', 
+    'Priority support'
+  ]
+
   // Mock user data
   const [userInfo, setUserInfo] = useState({
     name: 'John Doe',
@@ -278,18 +285,12 @@ export default function Settings() {
                       </div>
                       
                       <ul className="mt-6 space-y-3">
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Unlimited leads</span>
-                        </li>
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Custom templates</span>
-                        </li>
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Priority support</span>
-                        </li>
+                        {proFeatures.map((feature) => (
+                          <li key={feature} className="flex items-center">
+                            <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
+                            <span className="text-sm text-gray-600">{feature}</span>
+                          </li>
+                        ))}
                       </ul>
                       
                       <button
@@ -313,21 +314,6 @@ export default function Settings() {
                         <p className="text-sm text-gray-500">per year</p>
                         <p className="text-xs text-green-600 mt-1">$8.33/month</p>
                       </div>
-                      
-                      <ul className="mt-6 space-y-3">
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Unlimited leads</span>
-                        </li>
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Custom templates</span>
-                        </li>
-                        <li className="flex items-center">
-                          <CheckIcon className="h-4 w-4 text-green-500 mr-2" />
-                          <span className="text-sm text-gray-600">Priority support</span>
-                        </li>
-                      </ul>
                       
                       <button
                         onClick={() => handleUpgrade('annual')}
