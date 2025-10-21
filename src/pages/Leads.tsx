@@ -152,8 +152,9 @@ export default function Prospects() {
       setProspects(prev => prev.filter(prospect => prospect.id !== prospectId))
       console.log(`Removed prospect ${prospectId} from leads`)
     } else {
-      // TODO: Move to Outbounds page
-      console.log(`Moving prospect ${prospectId} to Outbounds with template ${action}`)
+      // Remove prospect from leads list (will be moved to outbounds in backend)
+      setProspects(prev => prev.filter(prospect => prospect.id !== prospectId))
+      console.log(`Moved prospect ${prospectId} to outbounds with template ${action}`)
     }
   }
 
