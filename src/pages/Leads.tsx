@@ -20,7 +20,7 @@ interface Template {
 
 export default function Prospects() {
   // Mock data - in real app this would come from API
-  const [prospects] = useState<Prospect[]>([
+  const [prospects, setProspects] = useState<Prospect[]>([
     {
       id: '1',
       name: 'Sarah Johnson',
@@ -148,8 +148,9 @@ export default function Prospects() {
   const handleQuickAction = (prospectId: string, action: string) => {
     console.log(`Action ${action} for prospect ${prospectId}`)
     if (action === 'X') {
-      // TODO: Move to Discarded page
-      console.log(`Moving prospect ${prospectId} to Discarded`)
+      // Remove prospect from leads list
+      setProspects(prev => prev.filter(prospect => prospect.id !== prospectId))
+      console.log(`Removed prospect ${prospectId} from leads`)
     } else {
       // TODO: Move to Outbounds page
       console.log(`Moving prospect ${prospectId} to Outbounds with template ${action}`)

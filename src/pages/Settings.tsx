@@ -116,7 +116,7 @@ export default function Settings() {
       <div className="space-y-6">
         <div>
           <h2 className="text-lg font-medium text-gray-900">General</h2>
-        </div>
+      </div>
 
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
@@ -237,12 +237,9 @@ export default function Settings() {
               <div className="space-y-6">
                 {/* Current Status */}
                 <div className="bg-white border border-gray-200 rounded-lg p-6">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Current Status</h4>
-                  
                   {subscription.plan === 'free' ? (
                     <div>
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="text-sm font-medium text-gray-700">Free Plan - 100 leads included</span>
+                      <div className="flex items-center justify-end mb-4">
                         <span className="text-sm text-gray-500">{subscription.leadsUsed} / {subscription.leadsLimit} used</span>
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
