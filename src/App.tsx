@@ -8,12 +8,6 @@ import AuthCallback from './components/AuthCallback'
 // Pages
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
-import Goal from './pages/Goal'
-import Templates from './pages/Templates'
-import Leads from './pages/Leads'
-import Outreach from './pages/Outreach'
-import Discarded from './pages/Discarded'
-import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -35,12 +29,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<ProtectedPage><Dashboard /></ProtectedPage>} />
-            <Route path="/goal" element={<ProtectedPage><Goal /></ProtectedPage>} />
-            <Route path="/templates" element={<ProtectedPage><Templates /></ProtectedPage>} />
-            <Route path="/prospects" element={<ProtectedPage><Leads /></ProtectedPage>} />
-            <Route path="/outreach" element={<ProtectedPage><Outreach /></ProtectedPage>} />
-            <Route path="/discarded" element={<ProtectedPage><Discarded /></ProtectedPage>} />
-            <Route path="/settings" element={<ProtectedPage><Settings /></ProtectedPage>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
     </>

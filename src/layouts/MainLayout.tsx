@@ -8,12 +8,6 @@ import {
   Bars3Icon,
   XMarkIcon,
   QuestionMarkCircleIcon,
-  TagIcon,
-  DocumentTextIcon,
-  UserGroupIcon,
-  PaperAirplaneIcon,
-  TrashIcon,
-  Cog6ToothIcon,
 } from '@heroicons/react/24/outline'
 import SupportTicketModal from '../components/SupportTicketModal'
 import ToastContainer from '../components/ToastContainer'
@@ -21,12 +15,6 @@ import ToastContainer from '../components/ToastContainer'
 
 const navigation = [
   { name: 'Dashboard', to: '/dashboard', icon: HomeIcon },
-  { name: 'Goal', to: '/goal', icon: TagIcon },
-  { name: 'Templates', to: '/templates', icon: DocumentTextIcon },
-  { name: 'Leads', to: '/prospects', icon: UserGroupIcon },
-  { name: 'Outreach', to: '/outreach', icon: PaperAirplaneIcon },
-  { name: 'Discarded', to: '/discarded', icon: TrashIcon },
-  { name: 'Settings', to: '/settings', icon: Cog6ToothIcon },
 ]
 
 function classNames(...classes: string[]) {
@@ -83,7 +71,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
             </button>
           ) : (
             <Link to="/dashboard" className="flex items-center">
-              <img src="/logo.svg" alt="EverLeads" className="h-12 w-auto" />
+              <img src="/logo.svg" alt="Swirl" className="h-12 w-auto" />
             </Link>
           )}
         </div>
